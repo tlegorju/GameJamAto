@@ -67,5 +67,9 @@ PrefabInstance:
       propertyPath: _lifePoint
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 6938165365280508527, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f7e0aec60b9a6e64ea0ed1de235f1a7a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
