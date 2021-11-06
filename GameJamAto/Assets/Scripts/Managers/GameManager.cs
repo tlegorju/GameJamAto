@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
 
-    [SerializeField] private int LIFE_AT_START = 10;
+    public const int LIFE_AT_START = 10;
 
     private int lifeLeft = 10;
     public int LifeLeft { get { return lifeLeft; } }
@@ -28,17 +28,34 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
+    private void Start()
+    {
+        Reset();
+        StartPlay();
+    }
+
     public void Reset()
     {
         lifeLeft = LIFE_AT_START;
         score = 0;
+        UIManager.Instance.Reset();
+    }
+
+    public void StartPlay()
+    {
+        UIManager.Instance.Init();
+    }
+
+    public void StopPlay()
+    {
+
     }
 
     public void TakeDamages(int damages)
     {
         lifeLeft = Mathf.Max(0, lifeLeft - damages);
-        //UIMananager.Instance.UpdateLifeLeft(lifeLeft);
-        if(CheckForGameOver())
+        UIManager.Instance.UpdateHearts(lifeLeft);
+        if (CheckForGameOver())
         {
             TriggerGameOver();
         }
@@ -63,6 +80,6 @@ public class GameManager : MonoBehaviour
     public void AddScore(int addedScore)
     {
         score += addedScore;
-        //UPDATE UI SCORE
+        UIManager.Instance.UpdateScore(score);
     }
 }
