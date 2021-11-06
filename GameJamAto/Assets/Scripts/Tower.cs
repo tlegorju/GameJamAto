@@ -105,4 +105,17 @@ public class Tower : MonoBehaviour
         GameObject bullet = Instantiate(Bullet, BulletSpawn.position, Quaternion.LookRotation(tf.position - BulletSpawn.transform.position));
         bullet.GetComponent<Bullet>().SetTarget(tf);
     }
+
+    public void SetCoins(int number) {
+        coinQuantity = number;
+    }
+
+    public int GetCoins(int number) {
+        return coinQuantity;
+    }
+
+    public void AddCoins(int number) {
+        coinQuantity += number;
+    }
+    
 }
