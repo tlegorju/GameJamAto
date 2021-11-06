@@ -42,10 +42,10 @@ public class Tower : MonoBehaviour
 
     void LookAtCurrentTarget() {
         if(currentTargetPos != null) {
-            Quaternion quat = Quaternion.LookRotation(currentTargetPos);
-            quat.x = 0;
-            quat.z = 0;
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, quat, 200 * Time.deltaTime);
+            Vector3 targetDir = currentTargetPos - transform.position;
+            targetDir.y = 0;
+            Quaternion quat = Quaternion.LookRotation(targetDir);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, quat, 500 * Time.deltaTime);
         }
     }
 

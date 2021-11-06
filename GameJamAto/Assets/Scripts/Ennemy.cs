@@ -15,7 +15,7 @@ public class Ennemy : MonoBehaviour
             _lifePoint = value;
             if (_lifePoint >= 0)
             {
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
     }
