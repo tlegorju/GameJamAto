@@ -6,15 +6,27 @@ public class Ennemy : MonoBehaviour
 {
     [SerializeField]
     private int _lifePoint;
-    public int LifePoint { get => _lifePoint; set => _lifePoint = value; }
+    public int LifePoint
+    {
+        get => _lifePoint;
+
+        set
+        {
+            _lifePoint = value;
+            if (_lifePoint >= 0)
+            {
+                Destroy(this);
+            }
+        }
+    }
 
     [SerializeField]
     private float _speed;
     public float Speed { get => _speed; set => _speed = value; }
 
     [SerializeField]
-    private float _damage;
-    public float Damage { get => _damage; set => _damage = value; }
+    private int _damage;
+    public int Damage { get => _damage; set => _damage = value; }
 
     [SerializeField]
     private Path _path;
@@ -43,11 +55,20 @@ public class Ennemy : MonoBehaviour
         transform.position = Vector3.Lerp(ptDepart.position, ptArrive.position, _travelCompletion);
         _travelCompletion += Time.deltaTime * Speed / Vector3.Distance(ptDepart.position, ptArrive.position);
 
-            Debug.Log(_travelCompletion);
         if (_travelCompletion > 1 && _nextCheckPoint < (_path.Points.Count - 1))
         {
             _nextCheckPoint++;
             _travelCompletion = 0;
         }
+    }
+
+    public void TakeDamages(int damage)
+    {
+        LifePoint -= damage;
+    }
+
+    public void DamagePlayer()
+    {
+        GameManager.Instance.TakeDamages(Damage);
     }
 }
