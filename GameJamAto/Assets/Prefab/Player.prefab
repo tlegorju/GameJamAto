@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6691934212211320100}
   - component: {fileID: 6691934212211320107}
   - component: {fileID: 2356692094912825801}
-  - component: {fileID: 825896983}
   - component: {fileID: 825896984}
+  - component: {fileID: 825896983}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -195,6 +195,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &825896984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6691934212211320106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d08ed6b3b8d80a34db39e90c6c38151d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!195 &825896983
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -217,15 +229,3 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &825896984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6691934212211320106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d08ed6b3b8d80a34db39e90c6c38151d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

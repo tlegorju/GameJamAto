@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     public void StartPlay()
     {
+        Debug.Log("CLICK");
         UIManager.Instance.InitGameHUD();
         SoundManager.Instance.PlayMusic();
     }

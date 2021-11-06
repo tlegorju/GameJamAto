@@ -107,7 +107,7 @@ public class UIManager : MonoBehaviour
             return;
 
         string[] scoreSplit = scoreString.Split('\n');
-        for(int i=0;i< scoreSplit.Length;i++)
+        for (int i = 0; i < scoreSplit.Length; i++)
         {
             string[] stringData = scoreSplit[i].Split(':');
             Highscore data = new Highscore(stringData[0], int.Parse(stringData[1]));
@@ -118,8 +118,8 @@ public class UIManager : MonoBehaviour
 
     public void SaveHighscores()
     {
-        string stringData="";
-        for(int i=0;i<highscores.Length;i++)
+        string stringData = "";
+        for (int i = 0; i < highscores.Length; i++)
         {
             stringData += highscores[i].pseudo + ':' + highscores[i].score + '\n';
         }
@@ -129,9 +129,9 @@ public class UIManager : MonoBehaviour
     public void AddHighscore(string pseudo, int score)
     {
         Highscore newHighscore = new Highscore(pseudo, score);
-        for(int i=0;i<highscores.Length;i++)
+        for (int i = 0; i < highscores.Length; i++)
         {
-            if(newHighscore.score >= highscores[i].score)
+            if (newHighscore.score >= highscores[i].score)
             {
                 Highscore tmpHighscore = highscores[i];
                 highscores[i] = newHighscore;
@@ -158,7 +158,7 @@ public class UIManager : MonoBehaviour
 
         HUDTransform.gameObject.SetActive(true);
 
-        for(int i=0;i<GameManager.Instance.LifeLeft; i++)
+        for (int i = 0; i < GameManager.Instance.LifeLeft; i++)
         {
             GameObject tmpHeart = Instantiate(HeartPrefab, HeartParent);
             tmpHeart.GetComponent<Image>().sprite = ActiveHeart;
@@ -171,7 +171,7 @@ public class UIManager : MonoBehaviour
 
     public void CleanHUD()
     {
-        for(int i=HeartParent.childCount-1;i>=0;i--)
+        for (int i = HeartParent.childCount - 1; i >= 0; i--)
         {
             Destroy(HeartParent.GetChild(i).gameObject);
         }
@@ -184,7 +184,7 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < GameManager.LIFE_AT_START; i++)
         {
-            HeartParent.GetChild(i).GetComponent<Image>().sprite = GameManager.Instance.LifeLeft>i? ActiveHeart : InactiveHeart;
+            HeartParent.GetChild(i).GetComponent<Image>().sprite = GameManager.Instance.LifeLeft > i ? ActiveHeart : InactiveHeart;
         }
     }
 
@@ -193,7 +193,7 @@ public class UIManager : MonoBehaviour
         CoinCounter.text = coinsCount.ToString() + " Coins";
     }
 
-    public void UpdateWaves(int waveCount) 
+    public void UpdateWaves(int waveCount)
     {
         WaveCounter.text = "Wave " + waveCount.ToString();
     }
