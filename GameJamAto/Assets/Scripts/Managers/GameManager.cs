@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Reset();
-        StartPlay();
+        UIManager.Instance.OpenMainMenu();
     }
 
     public void Reset()
@@ -79,6 +79,16 @@ public class GameManager : MonoBehaviour
 
         SoundManager.Instance.PlayGameOver();
         UIManager.Instance.GameOver(score);
+        Invoke("GoBackToMainMenu", 3);
+    }
+
+    private void GoBackToMainMenu()
+    {
+        if(UIManager.Instance.CanAddHighscore(score))
+        {
+            UIManager.Instance.AddHighscore("THI", score);
+        }
+        UIManager.Instance.OpenMainMenu();
     }
 
     public void AddScore(int addedScore)
