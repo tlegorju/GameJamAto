@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     public void StartPlay()
     {
         UIManager.Instance.InitGameHUD();
+        SoundManager.Instance.PlayMusic();
     }
 
     public void StopPlay()

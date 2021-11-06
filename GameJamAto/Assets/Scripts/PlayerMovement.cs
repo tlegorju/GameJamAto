@@ -8,6 +8,13 @@ public class PlayerMovement : MonoBehaviour
     private NavMeshAgent nav;
     private RaycastHit hit;
 
+    private AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

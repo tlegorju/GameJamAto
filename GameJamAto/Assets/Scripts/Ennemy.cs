@@ -17,6 +17,10 @@ public class Ennemy : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+            else
+            {
+                SoundManager.Instance.TryPlayNerdTakesDamageClip(audioSource);
+            }
         }
     }
 
@@ -37,6 +41,13 @@ public class Ennemy : MonoBehaviour
     private int _nextCheckPoint = 1;
 
     private float _travelCompletion = 0;
+
+    private AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -74,5 +85,16 @@ public class Ennemy : MonoBehaviour
     public void DamagePlayer()
     {
         GameManager.Instance.TakeDamages(Damage);
+    }
+
+    public void Dies()
+    {
+        SoundManager.Instance.TryPlayNerdDiesClip(audioSource);
+        Invoke("DestroyObject", 2);
+    }
+
+    private void DestroyObject()
+    {
+        Destroy(gameObject);
     }
 }
