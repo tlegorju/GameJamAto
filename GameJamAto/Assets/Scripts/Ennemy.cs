@@ -23,6 +23,7 @@ public class Ennemy : MonoBehaviour
     /// Index of the last point of the list through wich the ennemy passed
     /// </summary>
     private int _nextCheckPoint = 1;
+
     private float _travelCompletion = 0;
 
     // Start is called before the first frame update
@@ -42,7 +43,8 @@ public class Ennemy : MonoBehaviour
         transform.position = Vector3.Lerp(ptDepart.position, ptArrive.position, _travelCompletion);
         _travelCompletion += Time.deltaTime * Speed / Vector3.Distance(ptDepart.position, ptArrive.position);
 
-        if (_travelCompletion > 0.95f && _path.Points.Count < _nextCheckPoint)
+            Debug.Log(_travelCompletion);
+        if (_travelCompletion > 1 && _nextCheckPoint < (_path.Points.Count - 1))
         {
             _nextCheckPoint++;
             _travelCompletion = 0;
