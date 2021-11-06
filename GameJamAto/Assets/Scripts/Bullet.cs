@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     [Header("Paramètres de la boulette")]
     [Range(5, 100)][SerializeField] private float speed = 150f;
     [Range(5, 15)][SerializeField] private int lifetime = 5;
+    [Range(1, 10)][SerializeField] private int power = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,14 @@ public class Bullet : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
         if(lifetime <= 0) Destroy(gameObject);
-    } 
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if(other.GetComponent<Ennemy>() != null) {
+            other.GetComponent<Ennemy>().TakeDamages(power);
+            Destroy(gameObject);
+        }
+    }
 
     private IEnumerator LifetimeCountdown() {
         while(lifetime > 0) {
