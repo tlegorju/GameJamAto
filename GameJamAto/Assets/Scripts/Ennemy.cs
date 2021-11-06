@@ -13,7 +13,7 @@ public class Ennemy : MonoBehaviour
         set
         {
             _lifePoint = value;
-            if (_lifePoint >= 0)
+            if (_lifePoint <= 0)
             {
                 Destroy(gameObject);
             }
