@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     private int score = 0;
     public int Score { get { return score; } }
 
+    private int waveNumber = 0;
+    public int WaveNumber { get { return waveNumber; } }
+
     //[SerializeField] private PlayerController player;
 
 
@@ -38,12 +41,13 @@ public class GameManager : MonoBehaviour
     {
         lifeLeft = LIFE_AT_START;
         score = 0;
-        UIManager.Instance.Reset();
+        waveNumber = 0;
+        UIManager.Instance.CleanHUD();
     }
 
     public void StartPlay()
     {
-        UIManager.Instance.Init();
+        UIManager.Instance.InitGameHUD();
     }
 
     public void StopPlay()
@@ -73,13 +77,25 @@ public class GameManager : MonoBehaviour
         //Disable player control
         //Disable ennemies movement
 
-        //Play defeat sound
-        //Show game over UI
+        SoundManager.Instance.PlayGameOver();
+        UIManager.Instance.GameOver(score);
     }
 
     public void AddScore(int addedScore)
     {
         score += addedScore;
         UIManager.Instance.UpdateScore(score);
+    }
+
+    public void StartNextWave()
+    {
+        waveNumber++;
+        UIManager.Instance.UpdateWaves(waveNumber);
+        SoundManager.Instance.PlayWaveStart();
+    }
+
+    public void WaveFinished()
+    {
+        SoundManager.Instance.PlayWaveFinish();
     }
 }
