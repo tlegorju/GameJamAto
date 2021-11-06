@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     private static UIManager instance;
     public static UIManager Instance { get { return instance; } }
 
+    [SerializeField] private Transform MainMenuTransform;
+
     [SerializeField] private Transform HUDTransform;
 
     [SerializeField] private Transform HeartParent;
@@ -22,6 +24,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI WaveCounter;
     [SerializeField] private TextMeshProUGUI ScoreCounter;
 
+    [SerializeField] private Transform NewWaveParent;
+    [SerializeField] private TextMeshProUGUI NewWaveText;
+
+    [SerializeField] private Transform GameOverParent;
+    [SerializeField] private TextMeshProUGUI GameOverScoreText;
+
+
     private void Awake()
     {
         if (instance != null)
@@ -32,8 +41,10 @@ public class UIManager : MonoBehaviour
         instance = this;
     }
 
-    public void Init()
+    public void InitGameHUD()
     {
+        HUDTransform.gameObject.SetActive(true);
+
         for(int i=0;i<GameManager.Instance.LifeLeft; i++)
         {
             GameObject tmpHeart = Instantiate(HeartPrefab, HeartParent);
@@ -45,12 +56,15 @@ public class UIManager : MonoBehaviour
         ScoreCounter.text = "Score : 0";
     }
 
-    public void Reset()
+    public void CleanHUD()
     {
         for(int i=HeartParent.childCount-1;i>=0;i--)
         {
             Destroy(HeartParent.GetChild(i).gameObject);
         }
+        NewWaveParent.gameObject.SetActive(false);
+        GameOverParent.gameObject.SetActive(false);
+        HUDTransform.gameObject.SetActive(false);
     }
 
     public void UpdateHearts(int lifeLeft)
@@ -70,8 +84,29 @@ public class UIManager : MonoBehaviour
     {
         WaveCounter.text = "Wave " + waveCount.ToString();
     }
+
     public void UpdateScore(int score)
     {
         ScoreCounter.text = "Wave " + score.ToString();
+    }
+
+    public void NewWave(int waveNumber, float timeDisplay)
+    {
+        NewWaveParent.gameObject.SetActive(true);
+        NewWaveText.text = "Wave " + waveNumber.ToString();
+
+        StartCoroutine(DisableWaveTitle(timeDisplay));
+    }
+
+    private IEnumerator DisableWaveTitle(float timeDisplay)
+    {
+        yield return new WaitForSeconds(timeDisplay);
+        NewWaveParent.gameObject.SetActive(false);
+    }
+
+    public void GameOver(int score)
+    {
+        GameOverParent.gameObject.SetActive(true);
+        GameOverScoreText.text = "Score : " + score.ToString();
     }
 }

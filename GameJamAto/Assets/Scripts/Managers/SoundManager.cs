@@ -120,16 +120,22 @@ public class SoundManager : MonoBehaviour
     {
         ambientSource.clip = WaveStartSound;
         ambientSource.Play();
+
+        PlayMusic();
     }
 
     public void PlayWaveFinish()
     {
+        StopMusic();
+
         ambientSource.clip = WaveFinishSound;
         ambientSource.Play();
     }
 
     public void PlayGameOver()
     {
+        StopMusic();
+
         ambientSource.clip = GameOverSound;
         ambientSource.Play();
     }
