@@ -60,6 +60,10 @@ public class Ennemy : MonoBehaviour
             _nextCheckPoint++;
             _travelCompletion = 0;
         }
+        else if (_travelCompletion > 1)
+        {
+            DamagePlayer();
+        }
     }
 
     public void TakeDamages(int damage)
