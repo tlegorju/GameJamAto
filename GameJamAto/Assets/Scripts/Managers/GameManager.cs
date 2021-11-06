@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     private int lifeLeft = 10;
     public int LifeLeft { get { return lifeLeft; } }
 
+    private int score = 0;
+    public int Score { get { return score; } }
+
     //[SerializeField] private PlayerController player;
 
 
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour
     public void Reset()
     {
         lifeLeft = LIFE_AT_START;
+        score = 0;
     }
 
     public void TakeDamages(int damages)
@@ -54,5 +58,11 @@ public class GameManager : MonoBehaviour
 
         //Play defeat sound
         //Show game over UI
+    }
+
+    public void AddScore(int addedScore)
+    {
+        score += addedScore;
+        //UPDATE UI SCORE
     }
 }
