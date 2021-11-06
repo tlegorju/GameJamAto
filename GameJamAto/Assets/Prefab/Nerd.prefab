@@ -113,6 +113,7 @@ MonoBehaviour:
   _lifePoint: 50
   _speed: 2
   _damage: 1
+  _score: 10
   _path: {fileID: 0}
 --- !u!54 &5253357701151048880
 Rigidbody:
