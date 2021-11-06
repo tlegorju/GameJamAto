@@ -8,16 +8,20 @@ public class Tower : MonoBehaviour
     [Header("Objets")]
     [SerializeField] private GameObject Bullet;
     [SerializeField] private Transform BulletSpawn;
-
-    [Header("Paramètres")]
-    [Range(3, 50)][SerializeField] private float viewRadius = 10f;
     [SerializeField] private LayerMask enemyMask;
+
+    [Header("Paramètres de la tour")]
+    [Range(3, 50)][SerializeField] private float viewRadius = 10f;
     [Range(0, 10)][SerializeField] private float firerate = .1f;
     [Range(1, 50)][SerializeField] private int maxTargetAtOnce = 2;
+    [Range(1, 500)][SerializeField] private int coinQuantity = 3;
+    [Range(1, 100)][SerializeField] private int coinDuration = 15;
 
     /* PROPERTIES */
     private Collider[] _targetsInViewRadius = {};
     private List<Collider> _targetsToShoot = new List<Collider>();
+    private Vector3 currentTargetPos;
+    [SerializeField]public int timer = 0;
 
     private void OnDrawGizmosSelected()
     {
@@ -33,7 +37,16 @@ public class Tower : MonoBehaviour
 
     void Update()
     {
-        
+        LookAtCurrentTarget();
+    }
+
+    void LookAtCurrentTarget() {
+        if(currentTargetPos != null) {
+            Quaternion quat = Quaternion.LookRotation(currentTargetPos);
+            quat.x = 0;
+            quat.z = 0;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, quat, 200 * Time.deltaTime);
+        }
     }
 
     IEnumerator routineFindTargets(float delay) {
@@ -57,18 +70,39 @@ public class Tower : MonoBehaviour
     }
 
     void GetAndFireAtTargets() {
-        _targetsToShoot.Clear();
-        foreach(Collider collider in _targetsInViewRadius) {
-            if(_targetsToShoot.Count <= maxTargetAtOnce) {
-                _targetsToShoot.Add(collider);
+        // Check if timer is empty then check if the tower has coins to add time to the timer
+        if(timer <= 0 && coinQuantity > 0) {
+            timer += coinDuration + 1;
+            coinQuantity--;
+        }
+        if(timer > 0) {
+            if(timer > coinDuration) {
+                timer--;
+                StartCoroutine("CountDown");
+            }
+             _targetsToShoot.Clear();
+            foreach(Collider collider in _targetsInViewRadius) {
+                if(_targetsToShoot.Count <= (maxTargetAtOnce - 1)) {
+                    _targetsToShoot.Add(collider);
+                }
+            }
+            foreach(Collider collider in _targetsToShoot) {
+                FireTarget(collider.transform);
             }
         }
-        foreach(Collider collider in _targetsToShoot) {
-            FireTarget(collider.transform);
+       
+    }
+
+    IEnumerator CountDown() {
+        while(timer > 0) {
+            yield return new WaitForSeconds(1f);
+            timer--;
         }
     }
 
     void FireTarget(Transform tf) {
-        Instantiate(Bullet, BulletSpawn.position, Quaternion.LookRotation(tf.position - BulletSpawn.transform.position));
+        currentTargetPos = tf.position;
+        GameObject bullet = Instantiate(Bullet, BulletSpawn.position, Quaternion.LookRotation(tf.position - BulletSpawn.transform.position));
+        bullet.GetComponent<Bullet>().SetTarget(tf);
     }
 }
