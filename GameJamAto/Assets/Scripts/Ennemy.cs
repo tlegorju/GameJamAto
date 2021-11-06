@@ -15,6 +15,7 @@ public class Ennemy : MonoBehaviour
             _lifePoint = value;
             if (_lifePoint <= 0)
             {
+                GameManager.Instance.AddScore(Score);
                 Destroy(gameObject);
             }
         }
@@ -27,6 +28,10 @@ public class Ennemy : MonoBehaviour
     [SerializeField]
     private int _damage;
     public int Damage { get => _damage; set => _damage = value; }
+
+    [SerializeField]
+    private int _score;
+    public int Score { get => _score; set => _score = value; }
 
     [SerializeField]
     private Path _path;
