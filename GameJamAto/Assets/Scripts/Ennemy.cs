@@ -13,9 +13,9 @@ public class Ennemy : MonoBehaviour
         set
         {
             _lifePoint = value;
-            if (_lifePoint >= 0)
+            if (_lifePoint <= 0)
             {
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
     }
@@ -59,6 +59,10 @@ public class Ennemy : MonoBehaviour
         {
             _nextCheckPoint++;
             _travelCompletion = 0;
+        }
+        else if (_travelCompletion > 1)
+        {
+            DamagePlayer();
         }
     }
 

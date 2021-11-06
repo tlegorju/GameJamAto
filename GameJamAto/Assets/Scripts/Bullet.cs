@@ -21,8 +21,9 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(target);
+        if(lifetime <= 0 || target == null) Destroy(gameObject);
         transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        if(lifetime <= 0) Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other) {
