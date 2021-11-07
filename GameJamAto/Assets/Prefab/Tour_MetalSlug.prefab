@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 1164607135244937212}
   m_Layer: 0
   m_Name: Tour_MetalSlug
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,6 +195,7 @@ MonoBehaviour:
   coinQuantity: 3
   coinDuration: 15
   timer: 0
+  nav: {fileID: 0}
 --- !u!82 &1164607135244937212
 AudioSource:
   m_ObjectHideFlags: 0
