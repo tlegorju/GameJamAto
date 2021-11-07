@@ -60,4 +60,13 @@ public class CoinsManager : MonoBehaviour
         _timeSinceLastSpawn = 0;
         _nextSpawn = Random.Range(_minNextSpawn, _maxNextSpawn);
     }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            GameManager.Instance.AddCoin(1);
+            Destroy(gameObject);
+        }
+    }
 }

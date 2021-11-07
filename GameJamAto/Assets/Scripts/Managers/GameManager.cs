@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     private int lifeLeft = 10;
     public int LifeLeft { get { return lifeLeft; } }
 
+    private int coinLeft = 0;
+    public int CoinLeft { get { return coinLeft; } }
+
     private int score = 0;
     public int Score { get { return score; } }
 
@@ -109,5 +112,10 @@ public class GameManager : MonoBehaviour
     public void WaveFinished()
     {
         SoundManager.Instance.PlayWaveFinish();
+    }
+
+    public void AddCoin(int addedCoin)
+    {
+        coinLeft += addedCoin;
     }
 }
