@@ -152,10 +152,11 @@ public class GameManager : MonoBehaviour
 
     public bool UseCoin()
     {
-        if (coinLeft < 0)
+        if (coinLeft <= 0)
             return false;
 
         coinLeft--;
+        UIManager.Instance.UpdateCoins(coinLeft);
         return true;
     }
 }

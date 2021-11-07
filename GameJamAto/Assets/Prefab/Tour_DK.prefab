@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 3270104173319256992}
   - component: {fileID: 3270104173319256999}
   - component: {fileID: 6099119260904995478}
+  - component: {fileID: 1723556811085786464}
   m_Layer: 0
   m_Name: Tour_DK
   m_TagString: Tower
@@ -262,6 +263,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &1723556811085786464
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3270104173319256998}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.1138983, y: 5.6925936, z: 2.6826973}
+  m_Center: {x: 0.011849999, y: 3.0098958, z: 0.08294988}
 --- !u!1 &3270104173319741911
 GameObject:
   m_ObjectHideFlags: 0

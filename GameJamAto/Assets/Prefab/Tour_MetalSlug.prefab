@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 3414818902512547369}
   - component: {fileID: 3414818902512547374}
   - component: {fileID: 1164607135244937212}
+  - component: {fileID: -7617893869469774123}
   m_Layer: 0
   m_Name: Tour_MetalSlug
   m_TagString: Tower
@@ -292,6 +293,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &-7617893869469774123
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3414818902512547375}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.1138983, y: 4.8951635, z: 2.4464216}
+  m_Center: {x: 0.011849999, y: 2.5225773, z: -0.03518796}
 --- !u!1 &4033731709986016187
 GameObject:
   m_ObjectHideFlags: 0

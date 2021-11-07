@@ -136,16 +136,16 @@ public class Tower : MonoBehaviour
 
     public void AddCoins(int number)
     {
-        if (coinQuantity <= 0.01f)
+        if (coinQuantity <= 0 && timer <= 0.01f)
             SoundManager.Instance.PlayTowerActivated(audioSource);
         coinQuantity += number;
     }
 
-    public void RefillCoin(NavMeshAgent nav)
+    public void RefillCoin()
     {
-        this.nav = nav;
-        nav.stoppingDistance = 4f;
-        nav.destination = this.transform.position;
+        //this.nav = nav;
+        //nav.stoppingDistance = 4f;
+        //nav.destination = this.transform.position;
 
         if (GameManager.Instance.UseCoin())
         {
