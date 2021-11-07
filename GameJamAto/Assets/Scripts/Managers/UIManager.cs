@@ -122,6 +122,10 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < scoreSplit.Length; i++)
         {
             string[] stringData = scoreSplit[i].Split(':');
+            if(stringData==null || stringData.Length<2)
+            {
+                continue;
+            }
             Highscore data = new Highscore(stringData[0], int.Parse(stringData[1]));
 
             highscores[i] = data;
