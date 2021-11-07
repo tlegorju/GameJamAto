@@ -13,7 +13,6 @@ public class Bullet : MonoBehaviour
     [Range(5, 15)][SerializeField] private int lifetime = 5;
     [Range(1, 10)][SerializeField] private int power = 1;
 
-    // Start is called before the first frame update
     void Start()
     {
         StartCoroutine("LifetimeCountdown");
@@ -21,9 +20,8 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(target);
         if(lifetime <= 0 || target == null) Destroy(gameObject);
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        if(target != null) transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other) {

@@ -9,6 +9,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private GameObject Bullet;
     [SerializeField] private Transform BulletSpawn;
     [SerializeField] private LayerMask enemyMask;
+    [SerializeField] private TimerBar timerBar;
 
     [Header("Paramètres de la tour")]
     [Range(3, 50)][SerializeField] private float viewRadius = 10f;
@@ -32,7 +33,7 @@ public class Tower : MonoBehaviour
     void Start()
     {
         StartCoroutine("routineFindTargets", .2f);
-        StartCoroutine("routineFireAtTargets", firerate/100);
+        StartCoroutine("routineFireAtTargets", firerate/10);
     }
 
     void Update()
@@ -78,16 +79,18 @@ public class Tower : MonoBehaviour
         if(timer > 0) {
             if(timer > coinDuration) {
                 timer--;
+                timerBar.SetMaxTime(timer);
+                timerBar.SetTime(timer);
                 StartCoroutine("CountDown");
             }
              _targetsToShoot.Clear();
             foreach(Collider collider in _targetsInViewRadius) {
-                if(_targetsToShoot.Count <= (maxTargetAtOnce - 1)) {
+                if(_targetsToShoot.Count <= (maxTargetAtOnce - 1) && collider != null) {
                     _targetsToShoot.Add(collider);
                 }
             }
             foreach(Collider collider in _targetsToShoot) {
-                FireTarget(collider.transform);
+                if(collider != null) FireTarget(collider.transform);
             }
         }
        
@@ -97,6 +100,7 @@ public class Tower : MonoBehaviour
         while(timer > 0) {
             yield return new WaitForSeconds(1f);
             timer--;
+            timerBar.SetTime(timer);
         }
     }
 
@@ -117,5 +121,5 @@ public class Tower : MonoBehaviour
     public void AddCoins(int number) {
         coinQuantity += number;
     }
-    
+
 }
