@@ -195,7 +195,7 @@ MonoBehaviour:
   firerate: 1
   maxTargetAtOnce: 3
   coinQuantity: 3
-  coinDuration: 8
+  coinDuration: 14
   timer: 0
   nav: {fileID: 0}
 --- !u!82 &1164607135244937212
@@ -703,6 +703,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4520859612109793422, guid: 3d66197e3c4ca3a45919caafdf1ff424, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520859612109793422, guid: 3d66197e3c4ca3a45919caafdf1ff424, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 550d093938367cc4f9a4a04b004a8453, type: 2}
+    - target: {fileID: 7639640508527647824, guid: 3d66197e3c4ca3a45919caafdf1ff424, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639640508527647824, guid: 3d66197e3c4ca3a45919caafdf1ff424, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 550d093938367cc4f9a4a04b004a8453, type: 2}
     m_RemovedComponents:
     - {fileID: -4472243231159115116, guid: 3d66197e3c4ca3a45919caafdf1ff424, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3d66197e3c4ca3a45919caafdf1ff424, type: 3}

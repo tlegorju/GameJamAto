@@ -8321,7 +8321,7 @@ MonoBehaviour:
   WaveFinishSound: {fileID: 8300000, guid: 6bb1ff5314cf88d4696f4d94ee4c9959, type: 3}
   GameOverSound: {fileID: 8300000, guid: d63b921a30b3d834eb6967be3a9cec57, type: 3}
   HighscoreSound: {fileID: 8300000, guid: 63a0c55b44a8f5c4bb807c9917a167c1, type: 3}
-  music: {fileID: 8300000, guid: 4ec9c95f5e922674aa3105e1a2eea452, type: 3}
+  music: {fileID: 8300000, guid: 8886da6eb6a0e8d489f153f2bd394f8b, type: 3}
 --- !u!82 &3166501907326114079
 AudioSource:
   m_ObjectHideFlags: 0

@@ -165,7 +165,7 @@ MonoBehaviour:
   firerate: 1.5
   maxTargetAtOnce: 2
   coinQuantity: 3
-  coinDuration: 8
+  coinDuration: 16
   timer: 0
   nav: {fileID: 0}
 --- !u!82 &8124836072689075619
