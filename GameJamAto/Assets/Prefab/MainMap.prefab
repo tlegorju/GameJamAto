@@ -2587,6 +2587,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 281530232392410818, guid: d72d98dc7d214bf438c74a3d7360446f, type: 3}
+      propertyPath: _maxNextSpawn
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 281530232392410818, guid: d72d98dc7d214bf438c74a3d7360446f, type: 3}
+      propertyPath: _minNextSpawn
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 281530232392410818, guid: d72d98dc7d214bf438c74a3d7360446f, type: 3}
       propertyPath: CoinsSpanwers.Array.data[0]
       value: 
       objectReference: {fileID: 419500204899124150}
