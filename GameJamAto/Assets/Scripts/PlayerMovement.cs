@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private NavMeshAgent nav;
     private RaycastHit hit;
+    public CameraShake cameraShake;
 
     private AudioSource audioSource;
 
@@ -38,8 +39,10 @@ public class PlayerMovement : MonoBehaviour
                         return;
                     }
                 }
+                
                 nav.SetDestination(hit.point);
             }
         }
+        
     }
 }
