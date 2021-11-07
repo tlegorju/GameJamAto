@@ -44,8 +44,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coin: {fileID: 635245594508128351, guid: 981afcb3e5f4de141964f72824feaa84, type: 3}
-  _minNextSpawn: 10
-  _maxNextSpawn: 50
+  _minNextSpawn: 5
+  _maxNextSpawn: 20
   _maxCoinsOnGround: 5
-  _numberOfCoinsActuallySpawn: 0
-  CoinsSpanwers: []
+  CoinsSpanwers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
