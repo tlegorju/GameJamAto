@@ -15,6 +15,10 @@ public class SoundManager : MonoBehaviour
     public const int MAX_NUMBER_OF_NERD_CLIP= 5;
     private AudioSource[] nerdSoundInstances = new AudioSource[MAX_NUMBER_OF_NERD_CLIP];
 
+    [SerializeField] AudioClip[] towerShootsClip;
+    public const int MAX_NUMBER_OF_TOWER_SHOOT = 5;
+    private AudioSource[] towerShootsInstance = new AudioSource[MAX_NUMBER_OF_NERD_CLIP];
+
     [SerializeField] AudioClip insertCoinClip;
     [SerializeField] AudioClip pickUpCoinClip;
     [SerializeField] AudioClip towerActivatedClip;
@@ -23,6 +27,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioClip WaveStartSound;
     [SerializeField] AudioClip WaveFinishSound;
     [SerializeField] AudioClip GameOverSound;
+    [SerializeField] AudioClip HighscoreSound;
 
     [SerializeField] AudioClip music;
 
@@ -88,6 +93,23 @@ public class SoundManager : MonoBehaviour
         return false;
     }
 
+    //Return false if we can't play the clip because of too many instances
+    public bool TryPlayTowerShootClip(AudioSource source)
+    {
+        for (int i = 0; i < towerShootsInstance.Length; ++i)
+        {
+            if (towerShootsInstance[i] == null || towerShootsInstance[i].isPlaying == false)
+            {
+                source.clip = towerShootsClip[Random.Range(0, towerShootsClip.Length)];
+                source.pitch = Random.Range(.8f, 1.2f);
+                source.Play();
+                towerShootsInstance[i] = source;
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void PlayInsertCoin(AudioSource source)
     {
         source.clip = insertCoinClip;
@@ -140,6 +162,11 @@ public class SoundManager : MonoBehaviour
         ambientSource.Play();
     }
 
+    public void PlayHighscore()
+    {
+        ambientSource.clip = HighscoreSound;
+        ambientSource.Play();
+    }
 
     public void PlayMusic()
     {

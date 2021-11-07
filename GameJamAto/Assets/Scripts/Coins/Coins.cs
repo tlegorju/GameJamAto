@@ -7,15 +7,26 @@ public class Coins : MonoBehaviour
     [SerializeField]
     private float speed;
 
+    [SerializeField]
+    int _lifeTimeMax = 10;
+
+    float _lifeTime = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
         this.transform.Rotate(Vector3.up * speed * Time.deltaTime);
+
+        if (_lifeTime > _lifeTimeMax)
+        {
+            //Destroy(gameObject);
+        }
+
+        _lifeTime += Time.deltaTime;
     }
 }

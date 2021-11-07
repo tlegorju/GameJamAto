@@ -24,12 +24,19 @@ public class Tower : MonoBehaviour
     private Vector3 currentTargetPos;
     [SerializeField]public int timer = 0;
 
+    private AudioSource audioSource;
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, viewRadius);
     }
-    
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Start()
     {
         StartCoroutine("routineFindTargets", .2f);
@@ -102,12 +109,18 @@ public class Tower : MonoBehaviour
             timer--;
             timerBar.SetTime(timer);
         }
+        if(coinQuantity==0)
+        {
+            SoundManager.Instance.PlayTowerDeactivated(audioSource);
+        }
     }
 
     void FireTarget(Transform tf) {
         currentTargetPos = tf.position;
         GameObject bullet = Instantiate(Bullet, BulletSpawn.position, Quaternion.LookRotation(tf.position - BulletSpawn.transform.position));
         bullet.GetComponent<Bullet>().SetTarget(tf);
+
+        SoundManager.Instance.TryPlayTowerShootClip(audioSource);
     }
 
     public void SetCoins(int number) {
@@ -118,7 +131,10 @@ public class Tower : MonoBehaviour
         return coinQuantity;
     }
 
-    public void AddCoins(int number) {
+    public void AddCoins(int number)
+    {
+        if (coinQuantity <= 0.01f)
+            SoundManager.Instance.PlayTowerActivated(audioSource);
         coinQuantity += number;
     }
 

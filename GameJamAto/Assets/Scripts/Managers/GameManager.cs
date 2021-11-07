@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     private int lifeLeft = 10;
     public int LifeLeft { get { return lifeLeft; } }
 
+    private int coinLeft = 0;
+    public int CoinLeft { get { return coinLeft; } }
+
     private int score = 0;
     public int Score { get { return score; } }
 
@@ -34,7 +37,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Reset();
-        StartPlay();
+        UIManager.Instance.OpenMainMenu();
     }
 
     public void Reset()
@@ -47,7 +50,9 @@ public class GameManager : MonoBehaviour
 
     public void StartPlay()
     {
+        Debug.Log("CLICK");
         UIManager.Instance.InitGameHUD();
+        SoundManager.Instance.PlayMusic();
     }
 
     public void StopPlay()
@@ -79,6 +84,16 @@ public class GameManager : MonoBehaviour
 
         SoundManager.Instance.PlayGameOver();
         UIManager.Instance.GameOver(score);
+        Invoke("GoBackToMainMenu", 3);
+    }
+
+    private void GoBackToMainMenu()
+    {
+        if(UIManager.Instance.CanAddHighscore(score))
+        {
+            UIManager.Instance.AddHighscore("THI", score);
+        }
+        UIManager.Instance.OpenMainMenu();
     }
 
     public void AddScore(int addedScore)
@@ -97,5 +112,10 @@ public class GameManager : MonoBehaviour
     public void WaveFinished()
     {
         SoundManager.Instance.PlayWaveFinish();
+    }
+
+    public void AddCoin(int addedCoin)
+    {
+        coinLeft += addedCoin;
     }
 }
