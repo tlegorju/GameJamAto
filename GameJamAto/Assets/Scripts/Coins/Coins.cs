@@ -30,4 +30,13 @@ public class Coins : MonoBehaviour
 
         _lifeTime += Time.deltaTime;
     }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            GameManager.Instance.AddCoin(1);
+            Destroy(gameObject);
+        }
+    }
 }
