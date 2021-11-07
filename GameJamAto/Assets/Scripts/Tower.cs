@@ -100,7 +100,7 @@ public class Tower : MonoBehaviour
                 }
             }
             foreach(Collider collider in _targetsToShoot) {
-                if(collider != null) FireTarget(collider.transform);
+                if (collider != null && !collider.gameObject.GetComponent<Ennemy>()._isDead) FireTarget(collider.transform);
             }
         }
        
