@@ -53,7 +53,7 @@ public class Tower : MonoBehaviour
     }
 
     void LookAtCurrentTarget() {
-        if(currentTargetPos != null) {
+        if(currentTargetPos != null && currentTargetPos != Vector3.zero) {
             Vector3 targetDir = currentTargetPos - transform.position;
             targetDir.y = 0;
             Quaternion quat = Quaternion.LookRotation(targetDir);
