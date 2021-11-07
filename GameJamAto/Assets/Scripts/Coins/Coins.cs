@@ -11,6 +11,7 @@ public class Coins : MonoBehaviour
     int _lifeTimeMax = 10;
 
     float _lifeTime = 0;
+    int _scaleDuration = 1;
 
     // Start is called before the first frame update
     void Start()
