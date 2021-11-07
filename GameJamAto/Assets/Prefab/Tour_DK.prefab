@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb8b4b02409f8f42b0817f865f46561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 8346192536207017013, guid: 5a32b3491d9b9b9468f5b97c4a27cd16, type: 3}
+  Bullet: {fileID: 1935284339415510321, guid: 3e14779680bccbb49b591ef7f195981a, type: 3}
   BulletSpawn: {fileID: 3270104173319741904}
   enemyMask:
     serializedVersion: 2

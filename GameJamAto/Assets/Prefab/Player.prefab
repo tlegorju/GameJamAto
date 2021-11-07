@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1444965007231144792}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.17, y: 1.54, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.17, y: 3.01, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 6691934212211320102}
   m_RootOrder: 0
@@ -142,9 +142,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.6301277
-  m_Height: 3.0967906
+  m_Height: 6
   m_Direction: 1
-  m_Center: {x: 0.13012773, y: 1.5708274, z: 0}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!82 &2356692094912825801
 AudioSource:
   m_ObjectHideFlags: 0
@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d08ed6b3b8d80a34db39e90c6c38151d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraShake: {fileID: 0}
 --- !u!195 &825896983
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -263,15 +264,15 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.58
-  m_Speed: 12
-  m_Acceleration: 8
+  m_Speed: 15
+  m_Acceleration: 60
   avoidancePriority: 50
-  m_AngularSpeed: 200
-  m_StoppingDistance: 0
+  m_AngularSpeed: 1000
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 3
+  m_Height: 6
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

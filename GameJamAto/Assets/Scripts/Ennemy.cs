@@ -28,7 +28,7 @@ public class Ennemy : MonoBehaviour
         }
     }
 
-    private bool _isDead = false;
+    public bool _isDead = false;
 
     [SerializeField]
     private float _speed;
@@ -112,7 +112,7 @@ public class Ennemy : MonoBehaviour
         _isDead = true;
         WaveManager.Instance.EnemyDies();
         SoundManager.Instance.TryPlayNerdDiesClip(audioSource);
-        Invoke("DestroyObject", 2);
+        Invoke("DestroyObject", .5f);
     }
 
     private void DestroyObject()

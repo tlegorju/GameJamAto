@@ -152,6 +152,7 @@ public class GameManager : MonoBehaviour
     {
         coinLeft += addedCoin;
         UIManager.Instance.UpdateCoins(coinLeft);
+        SoundManager.Instance.PlayPickupCoin();
     }
 
     public bool UseCoin()

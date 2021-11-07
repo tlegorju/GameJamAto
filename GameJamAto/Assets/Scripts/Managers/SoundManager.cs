@@ -31,6 +31,8 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] AudioClip music;
 
+    private PlayerMovement player;
+
     private void Awake()
     {
         if(instance)
@@ -39,6 +41,7 @@ public class SoundManager : MonoBehaviour
             return;
         }
         instance = this;
+        player = FindObjectOfType<PlayerMovement>();
     }
 
     //Return false if we can't play the clip because of too many instances
@@ -117,11 +120,12 @@ public class SoundManager : MonoBehaviour
         source.Play();
     }
 
-    public void PlayPickupCoin(AudioSource source)
+    public void PlayPickupCoin()
     {
-        source.clip = pickUpCoinClip;
-        source.pitch = Random.Range(.8f, 1.2f);
-        source.Play();
+        AudioSource.PlayClipAtPoint(pickUpCoinClip, player.transform.position);
+        //source.clip = pickUpCoinClip;
+        //source.pitch = Random.Range(.8f, 1.2f);
+        //source.Play();
     }
 
     public void PlayTowerActivated(AudioSource source)
