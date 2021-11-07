@@ -140,7 +140,8 @@ public class GameManager : MonoBehaviour
     public void WaveFinished()
     {
         SoundManager.Instance.PlayWaveFinish();
-        Invoke("StartNextWave", 3);
+        if(gameState==GameState.Playing)
+            Invoke("StartNextWave", 3);
     }
 
     public void AddCoin(int addedCoin)

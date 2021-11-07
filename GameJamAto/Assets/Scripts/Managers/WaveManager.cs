@@ -75,6 +75,8 @@ public class WaveManager : MonoBehaviour
         while(currentEnemy < waveEnemy.Length)
         {
             yield return new WaitForSeconds(spawnDelay);
+            if (GameManager.Instance.CurrentGameState != GameState.Playing)
+                break;
             GameObject newEnemy = Instantiate(waveEnemy[currentEnemy].EnemyPrefab, pathArray[waveEnemy[currentEnemy].indexOfPath].Points[0].position, Quaternion.identity);
             newEnemy.GetComponent<Ennemy>()._path = pathArray[waveEnemy[currentEnemy].indexOfPath];
             currentEnemy++;
