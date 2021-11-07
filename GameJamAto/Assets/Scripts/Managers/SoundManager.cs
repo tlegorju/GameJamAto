@@ -120,12 +120,11 @@ public class SoundManager : MonoBehaviour
         source.Play();
     }
 
-    public void PlayPickupCoin()
+    public void PlayPickupCoin(AudioSource source)
     {
-        AudioSource.PlayClipAtPoint(pickUpCoinClip, player.transform.position);
-        //source.clip = pickUpCoinClip;
-        //source.pitch = Random.Range(.8f, 1.2f);
-        //source.Play();
+        source.clip = pickUpCoinClip;
+        source.pitch = Random.Range(.8f, 1.2f);
+        source.Play();
     }
 
     public void PlayTowerActivated(AudioSource source)

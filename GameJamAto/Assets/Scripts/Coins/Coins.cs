@@ -35,6 +35,7 @@ public class Coins : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            collision.gameObject.GetComponent<PlayerMovement>()?.PlayPickUpCoin();
             GameManager.Instance.AddCoin(1);
             Destroy(gameObject);
         }

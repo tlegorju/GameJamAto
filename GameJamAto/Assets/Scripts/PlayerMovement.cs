@@ -45,4 +45,9 @@ public class PlayerMovement : MonoBehaviour
         }
         
     }
+
+    public void PlayPickUpCoin()
+    {
+        SoundManager.Instance.PlayPickupCoin(audioSource);
+    }
 }
