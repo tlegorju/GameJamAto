@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2388709316330786389, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 5631583231286680121, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 381b168115d66fa44be34a81dfbf86ae, type: 3}
     - target: {fileID: 6938165365280508514, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: m_Name
       value: NerdAssassin Variant
@@ -54,6 +62,22 @@ PrefabInstance:
     - target: {fileID: 6938165365280508521, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6938165365280508524, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_Size.x
+      value: 1.0090778
+      objectReference: {fileID: 0}
+    - target: {fileID: 6938165365280508524, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_Size.y
+      value: 4.1623178
+      objectReference: {fileID: 0}
+    - target: {fileID: 6938165365280508524, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_Center.x
+      value: -0.004539013
+      objectReference: {fileID: 0}
+    - target: {fileID: 6938165365280508524, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_Center.y
+      value: 2.1380503
       objectReference: {fileID: 0}
     - target: {fileID: 6938165365280508525, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: _score

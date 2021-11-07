@@ -7,6 +7,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2388709316330786389, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388709316330786389, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388709316330786389, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388709316330786389, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5631583231286680121, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 136484c0fe549c94a929609b681ab312, type: 3}
     - target: {fileID: 6938165365280508514, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: m_Name
       value: NerdTank Variant
@@ -54,6 +74,22 @@ PrefabInstance:
     - target: {fileID: 6938165365280508521, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6938165365280508524, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_Size.x
+      value: 2.2715154
+      objectReference: {fileID: 0}
+    - target: {fileID: 6938165365280508524, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_Size.y
+      value: 4.321784
+      objectReference: {fileID: 0}
+    - target: {fileID: 6938165365280508524, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_Center.x
+      value: 0.015394449
+      objectReference: {fileID: 0}
+    - target: {fileID: 6938165365280508524, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_Center.y
+      value: 2.13805
       objectReference: {fileID: 0}
     - target: {fileID: 6938165365280508525, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: _score
