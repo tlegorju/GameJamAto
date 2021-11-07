@@ -134,7 +134,7 @@ Transform:
   m_GameObject: {fileID: 3092523889588615631}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 698646510287643158}
   - {fileID: 3092523889589167033}
@@ -166,7 +166,6 @@ MonoBehaviour:
   maxTargetAtOnce: 2
   coinQuantity: 3
   coinDuration: 16
-  timer: 0
   nav: {fileID: 0}
 --- !u!82 &8124836072689075619
 AudioSource:
