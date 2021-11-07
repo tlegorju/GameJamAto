@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     private int waveNumber = 0;
     public int WaveNumber { get { return waveNumber; } }
 
+    public CameraShake cameraShake;
+
     //[SerializeField] private PlayerController player;
 
     private GameState gameState;
@@ -82,6 +84,8 @@ public class GameManager : MonoBehaviour
     {
         lifeLeft = Mathf.Max(0, lifeLeft - damages);
         UIManager.Instance.UpdateHearts(lifeLeft);
+        StartCoroutine(cameraShake.Shake(0.15f, 0.4f));
+
         if (gameState == GameState.Playing && CheckForGameOver())
         {
             TriggerGameOver();
