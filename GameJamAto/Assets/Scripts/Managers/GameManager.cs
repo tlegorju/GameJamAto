@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState
+{
+    MainMenu,
+    Playing,
+    GameOver,
+    NewHighscore
+}
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
@@ -11,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     private int lifeLeft = 10;
     public int LifeLeft { get { return lifeLeft; } }
+
+    public const int COINS_AT_START = 5;
 
     private int coinLeft = 0;
     public int CoinLeft { get { return coinLeft; } }
@@ -23,6 +33,8 @@ public class GameManager : MonoBehaviour
 
     //[SerializeField] private PlayerController player;
 
+    private GameState gameState;
+    public GameState CurrentGameState { get { return gameState; } }
 
     private void Awake()
     {
@@ -37,22 +49,26 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Reset();
-        UIManager.Instance.OpenMainMenu();
     }
 
     public void Reset()
     {
+        gameState = GameState.MainMenu;
+
         lifeLeft = LIFE_AT_START;
         score = 0;
         waveNumber = 0;
+        coinLeft = COINS_AT_START;
         UIManager.Instance.CleanHUD();
+        UIManager.Instance.OpenMainMenu();
     }
 
     public void StartPlay()
     {
-        Debug.Log("CLICK");
         UIManager.Instance.InitGameHUD();
         SoundManager.Instance.PlayMusic();
+
+        gameState = GameState.Playing;
     }
 
     public void StopPlay()
@@ -64,7 +80,7 @@ public class GameManager : MonoBehaviour
     {
         lifeLeft = Mathf.Max(0, lifeLeft - damages);
         UIManager.Instance.UpdateHearts(lifeLeft);
-        if (CheckForGameOver())
+        if (gameState == GameState.Playing && CheckForGameOver())
         {
             TriggerGameOver();
         }
@@ -77,22 +93,31 @@ public class GameManager : MonoBehaviour
 
     public void TriggerGameOver()
     {
-        Debug.Log("Game Over");
+        gameState = GameState.GameOver;
 
         //Disable player control
         //Disable ennemies movement
 
         SoundManager.Instance.PlayGameOver();
         UIManager.Instance.GameOver(score);
-        Invoke("GoBackToMainMenu", 3);
+        //Check for new highscore ?
+
     }
 
-    private void GoBackToMainMenu()
+    public void ContinueGameOver()
     {
-        if(UIManager.Instance.CanAddHighscore(score))
+        if (UIManager.Instance.CanAddHighscore(score))
         {
-            UIManager.Instance.AddHighscore("THI", score);
+            gameState = GameState.NewHighscore;
+            UIManager.Instance.OpenNewHighscore();
+            return;
         }
+        gameState = GameState.MainMenu;
+        UIManager.Instance.OpenMainMenu();
+    }
+
+    public void GoBackToMainMenu()
+    {
         UIManager.Instance.OpenMainMenu();
     }
 
@@ -112,10 +137,20 @@ public class GameManager : MonoBehaviour
     public void WaveFinished()
     {
         SoundManager.Instance.PlayWaveFinish();
+        Invoke("StartNextWave", 3);
     }
 
     public void AddCoin(int addedCoin)
     {
         coinLeft += addedCoin;
+    }
+
+    public bool UseCoin()
+    {
+        if (coinLeft < 0)
+            return false;
+
+        coinLeft--;
+        return true;
     }
 }

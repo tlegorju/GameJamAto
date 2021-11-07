@@ -44,6 +44,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Transform CreditParent;
     [SerializeField] private Button CreditBackToMenuButton;
 
+    [SerializeField] private Transform NewHighscoreParent;
+
     public const int NUMBER_OF_HIGHSCORE = 10;
     public const string HIGHSCORE_LABEL_PREF = "Highscore";
     [SerializeField] private Highscore[] highscores = new Highscore[NUMBER_OF_HIGHSCORE];
@@ -77,10 +79,18 @@ public class UIManager : MonoBehaviour
         MainMenuTransform.gameObject.SetActive(true);
     }
 
+    public void OpenNewHighscore()
+    {
+        NewHighscoreParent.gameObject.SetActive(true);
+        CleanHUD();
+        MainMenuTransform.gameObject.SetActive(false);
+    }
+
     public void OpenMainMenu()
     {
         CleanHUD();
         MainMenuTransform.gameObject.SetActive(true);
+        NewHighscoreParent.gameObject.SetActive(false);
         LoadHighscores();
         InitHighscoresVisual();
     }
@@ -131,7 +141,7 @@ public class UIManager : MonoBehaviour
         Highscore newHighscore = new Highscore(pseudo, score);
         for (int i = 0; i < highscores.Length; i++)
         {
-            if (newHighscore.score >= highscores[i].score)
+            if (highscores[i] == null || newHighscore.score >= highscores[i].score)
             {
                 Highscore tmpHighscore = highscores[i];
                 highscores[i] = newHighscore;
@@ -144,7 +154,7 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < highscores.Length; i++)
         {
-            if (score >= highscores[i].score)
+            if (highscores[i]== null || score >= highscores[i].score)
             {
                 return true;
             }
