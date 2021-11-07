@@ -147,6 +147,7 @@ public class GameManager : MonoBehaviour
     public void AddCoin(int addedCoin)
     {
         coinLeft += addedCoin;
+        UIManager.Instance.UpdateCoins(coinLeft);
     }
 
     public bool UseCoin()
