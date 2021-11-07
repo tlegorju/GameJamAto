@@ -24,11 +24,14 @@ public class Tower : MonoBehaviour
     private Collider[] _targetsInViewRadius = {};
     private List<Collider> _targetsToShoot = new List<Collider>();
     private Vector3 currentTargetPos;
-    [SerializeField]public int timer = 0;
+    private int timer = 0;
+    private bool isShooting = false;
+    private bool isShootingCoroutine = true;
 
     private AudioSource audioSource;
 
     public NavMeshAgent nav;
+    
 
     private void OnDrawGizmosSelected()
     {
@@ -45,6 +48,8 @@ public class Tower : MonoBehaviour
     {
         StartCoroutine("routineFindTargets", .2f);
         StartCoroutine("routineFireAtTargets", firerate/10);
+        timerBar.SetMaxTime(timer);
+        timerBar.SetTime(timer);
     }
 
     void Update()
@@ -79,6 +84,8 @@ public class Tower : MonoBehaviour
 
     void FindTargets() {
         _targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, enemyMask);
+        if(_targetsInViewRadius.Length == 0) isShooting = false;
+        else isShooting = true;
     }
 
     void GetAndFireAtTargets() {
@@ -111,8 +118,10 @@ public class Tower : MonoBehaviour
     IEnumerator CountDown() {
         while(timer > 0) {
             yield return new WaitForSeconds(1f);
-            timer--;
-            timerBar.SetTime(timer);
+            if(isShooting) {
+                timer--;
+                timerBar.SetTime(timer);
+            }
         }
         if(coinQuantity==0)
         {
