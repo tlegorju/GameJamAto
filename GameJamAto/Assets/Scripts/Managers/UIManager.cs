@@ -210,7 +210,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateScore(int score)
     {
-        ScoreCounter.text = "Wave " + score.ToString();
+        ScoreCounter.text = "Score : " + score.ToString();
     }
 
     public void NewWave(int waveNumber, float timeDisplay)
