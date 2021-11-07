@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Tower : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class Tower : MonoBehaviour
     [SerializeField]public int timer = 0;
 
     private AudioSource audioSource;
+
+    public NavMeshAgent nav;
 
     private void OnDrawGizmosSelected()
     {
@@ -138,4 +141,15 @@ public class Tower : MonoBehaviour
         coinQuantity += number;
     }
 
+    public void RefillCoin(NavMeshAgent nav)
+    {
+        this.nav = nav;
+        nav.stoppingDistance = 4f;
+        nav.destination = this.transform.position;
+
+        if (GameManager.Instance.UseCoin())
+        {
+            AddCoins(1);
+        }
+    }
 }
