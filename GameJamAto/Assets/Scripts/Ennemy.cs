@@ -54,6 +54,11 @@ public class Ennemy : MonoBehaviour
 
     private AudioSource audioSource;
 
+    [SerializeField]
+    private GameObject _deathParticule;
+    [SerializeField]
+    private Transform _deathParticuleTransform;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -93,7 +98,7 @@ public class Ennemy : MonoBehaviour
 
     public void TakeDamages(int damage)
     {
-        if(!_isDead)
+        if (!_isDead)
             LifePoint -= damage;
     }
 
@@ -112,7 +117,8 @@ public class Ennemy : MonoBehaviour
         _isDead = true;
         WaveManager.Instance.EnemyDies();
         SoundManager.Instance.TryPlayNerdDiesClip(audioSource);
-        Invoke("DestroyObject", .5f);
+        Instantiate(_deathParticule, _deathParticuleTransform);
+        Invoke("DestroyObject", .3f);
     }
 
     private void DestroyObject()

@@ -193,7 +193,7 @@ MonoBehaviour:
   counter: {fileID: 1522561795897308844}
   viewRadius: 12.7
   firerate: 1
-  maxTargetAtOnce: 2
+  maxTargetAtOnce: 3
   coinQuantity: 3
   coinDuration: 8
   timer: 0
