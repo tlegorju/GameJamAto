@@ -13,10 +13,10 @@ public class Ennemy : MonoBehaviour
         set
         {
             _lifePoint = value;
-            if (_lifePoint <= 0)
+            if (_lifePoint <= 0 && !_isDead)
             {
                 GameManager.Instance.AddScore(Score);
-                Destroy(gameObject);
+                Dies();
             }
             else
             {
@@ -24,6 +24,8 @@ public class Ennemy : MonoBehaviour
             }
         }
     }
+
+    private bool _isDead = false;
 
     [SerializeField]
     private float _speed;
@@ -38,7 +40,7 @@ public class Ennemy : MonoBehaviour
     public int Score { get => _score; set => _score = value; }
 
     [SerializeField]
-    private Path _path;
+    public Path _path;
 
     /// <summary>
     /// Index of the last point of the list through wich the ennemy passed
@@ -67,6 +69,8 @@ public class Ennemy : MonoBehaviour
 
     private void MoveBetweenTwoPoints(Transform ptDepart, Transform ptArrive)
     {
+        if (_isDead)
+            return;
         transform.LookAt(ptArrive);
         transform.position = Vector3.Lerp(ptDepart.position, ptArrive.position, _travelCompletion);
         _travelCompletion += Time.deltaTime * Speed / Vector3.Distance(ptDepart.position, ptArrive.position);
@@ -84,16 +88,24 @@ public class Ennemy : MonoBehaviour
 
     public void TakeDamages(int damage)
     {
-        LifePoint -= damage;
+        if(!_isDead)
+            LifePoint -= damage;
     }
 
     public void DamagePlayer()
     {
+        if (_isDead)
+            return;
         GameManager.Instance.TakeDamages(Damage);
+        Dies();
     }
 
     public void Dies()
     {
+        if (_isDead)
+            return;
+        _isDead = true;
+        WaveManager.Instance.EnemyDies();
         SoundManager.Instance.TryPlayNerdDiesClip(audioSource);
         Invoke("DestroyObject", 2);
     }

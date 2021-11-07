@@ -4067,7 +4067,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3166501906620640350}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1034964370
 MonoBehaviour:
@@ -5077,7 +5077,7 @@ RectTransform:
   - {fileID: 208137823}
   - {fileID: 391609888}
   m_Father: {fileID: 3166501906620640350}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8307,6 +8307,59 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &2656846493693164350
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4242175049342041310}
+  - component: {fileID: 6220303538718600279}
+  m_Layer: 0
+  m_Name: WaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4242175049342041310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2656846493693164350}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3166501906620640350}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6220303538718600279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2656846493693164350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc570832250d67d44b5c4622cdf733cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefabs:
+  - {fileID: 6938165365280508514, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+  - {fileID: 2570146525732161557, guid: 68048fcd1dcf88b45a7b768b7fa72274, type: 3}
+  - {fileID: 441655135188875966, guid: d2e9127860c6ecb4785b349afd332823, type: 3}
+  enemyWeight:
+  - 1
+  - 0.4
+  - 0.2
+  spawnDelay: 1
+  numberOfEnnemyPerWave: 5
 --- !u!1 &3166501906620640351
 GameObject:
   m_ObjectHideFlags: 0
@@ -8337,6 +8390,7 @@ Transform:
   - {fileID: 3166501908373520387}
   - {fileID: 3166501908079693927}
   - {fileID: 3166501908325474543}
+  - {fileID: 4242175049342041310}
   - {fileID: 1248599708}
   - {fileID: 1034964371}
   m_Father: {fileID: 0}
@@ -8411,6 +8465,7 @@ MonoBehaviour:
   NewWaveText: {fileID: 1941136450}
   GameOverParent: {fileID: 94074237}
   GameOverScoreText: {fileID: 893697570}
+  GameOverContinueButton: {fileID: 296519851}
   OpenCreditButton: {fileID: 956145704}
   CreditParent: {fileID: 208137823}
   CreditBackToMenuButton: {fileID: 2015473552}

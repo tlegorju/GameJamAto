@@ -69,6 +69,8 @@ public class GameManager : MonoBehaviour
         SoundManager.Instance.PlayMusic();
 
         gameState = GameState.Playing;
+
+        Invoke("StartNextWave", 3);
     }
 
     public void StopPlay()
@@ -100,7 +102,6 @@ public class GameManager : MonoBehaviour
 
         SoundManager.Instance.PlayGameOver();
         UIManager.Instance.GameOver(score);
-        //Check for new highscore ?
 
     }
 
@@ -131,7 +132,9 @@ public class GameManager : MonoBehaviour
     {
         waveNumber++;
         UIManager.Instance.UpdateWaves(waveNumber);
+        UIManager.Instance.NewWave(waveNumber, 3);
         SoundManager.Instance.PlayWaveStart();
+        WaveManager.Instance.StartWave(waveNumber);
     }
 
     public void WaveFinished()

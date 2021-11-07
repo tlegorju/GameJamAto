@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Transform GameOverParent;
     [SerializeField] private TextMeshProUGUI GameOverScoreText;
+    [SerializeField] private Button GameOverContinueButton;
 
     [SerializeField] private Button OpenCreditButton;
     [SerializeField] private Transform CreditParent;
@@ -65,6 +66,7 @@ public class UIManager : MonoBehaviour
         PlayButton.onClick.AddListener(() => GameManager.Instance.StartPlay());
         OpenCreditButton.onClick.AddListener(() => OpenCredit());
         CreditBackToMenuButton.onClick.AddListener(() => CloseCredit());
+        GameOverContinueButton.onClick.AddListener(() => GameManager.Instance.ContinueGameOver());
     }
 
     private void OpenCredit()
@@ -129,7 +131,7 @@ public class UIManager : MonoBehaviour
     public void SaveHighscores()
     {
         string stringData = "";
-        for (int i = 0; i < highscores.Length; i++)
+        for (int i = 0; i < highscores.Length && highscores[i]!=null; i++)
         {
             stringData += highscores[i].pseudo + ':' + highscores[i].score + '\n';
         }
@@ -174,7 +176,7 @@ public class UIManager : MonoBehaviour
             tmpHeart.GetComponent<Image>().sprite = ActiveHeart;
         }
 
-        CoinCounter.text = "0 Coins";
+        CoinCounter.text = GameManager.Instance.CoinLeft.ToString() + " Coins";
         WaveCounter.text = "Wave 0";
         ScoreCounter.text = "Score : 0";
     }
@@ -194,6 +196,8 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < GameManager.LIFE_AT_START; i++)
         {
+            if (i >= HeartParent.childCount)
+                break;
             HeartParent.GetChild(i).GetComponent<Image>().sprite = GameManager.Instance.LifeLeft > i ? ActiveHeart : InactiveHeart;
         }
     }
@@ -229,6 +233,7 @@ public class UIManager : MonoBehaviour
 
     public void GameOver(int score)
     {
+        CleanHUD();
         GameOverParent.gameObject.SetActive(true);
         GameOverScoreText.text = "Score : " + score.ToString();
     }
