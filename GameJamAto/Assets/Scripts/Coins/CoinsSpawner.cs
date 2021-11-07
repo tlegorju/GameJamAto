@@ -17,7 +17,6 @@ public class CoinsSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(!_isFree && coinSpawned == null);
         if (!_isFree && coinSpawned == null)
         {
             _isFree = true;
