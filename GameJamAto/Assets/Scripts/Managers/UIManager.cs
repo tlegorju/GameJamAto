@@ -47,6 +47,10 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Transform NewHighscoreParent;
 
+    [SerializeField] private Button HowToPlayButton;
+    [SerializeField] private Transform HowToPlayParent;
+    [SerializeField] private Button HowToBackToMenuButton;
+
     public const int NUMBER_OF_HIGHSCORE = 10;
     public const string HIGHSCORE_LABEL_PREF = "Highscore";
     [SerializeField] private Highscore[] highscores = new Highscore[NUMBER_OF_HIGHSCORE];
@@ -66,6 +70,8 @@ public class UIManager : MonoBehaviour
         PlayButton.onClick.AddListener(() => GameManager.Instance.StartPlay());
         OpenCreditButton.onClick.AddListener(() => OpenCredit());
         CreditBackToMenuButton.onClick.AddListener(() => CloseCredit());
+        HowToPlayButton.onClick.AddListener(() => OpenHowTo());
+        HowToBackToMenuButton.onClick.AddListener(() => CloseHowTo());
         GameOverContinueButton.onClick.AddListener(() => GameManager.Instance.ContinueGameOver());
     }
 
@@ -78,6 +84,18 @@ public class UIManager : MonoBehaviour
     private void CloseCredit()
     {
         CreditParent.gameObject.SetActive(false);
+        MainMenuTransform.gameObject.SetActive(true);
+    }
+
+    private void OpenHowTo()
+    {
+        HowToPlayParent.gameObject.SetActive(true);
+        MainMenuTransform.gameObject.SetActive(false);
+    }
+
+    private void CloseHowTo()
+    {
+        HowToPlayParent.gameObject.SetActive(false);
         MainMenuTransform.gameObject.SetActive(true);
     }
 

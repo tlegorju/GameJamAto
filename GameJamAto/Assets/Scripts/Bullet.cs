@@ -28,7 +28,6 @@ public class Bullet : MonoBehaviour
         if(other.GetComponent<Ennemy>() != null) {
             other.GetComponent<Ennemy>().TakeDamages(power);
             Destroy(gameObject);
-            Debug.Log("Destroy");
         }
     }
 
