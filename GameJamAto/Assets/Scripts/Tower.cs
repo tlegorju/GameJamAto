@@ -11,6 +11,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private Transform BulletSpawn;
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private TimerBar timerBar;
+    [SerializeField] private CounterCoinUI counter;
 
     [Header("Paramètres de la tour")]
     [Range(3, 50)][SerializeField] private float viewRadius = 10f;
@@ -85,6 +86,7 @@ public class Tower : MonoBehaviour
         if(timer <= 0 && coinQuantity > 0) {
             timer += coinDuration + 1;
             coinQuantity--;
+            counter.SetText(coinQuantity.ToString());
         }
         if(timer > 0) {
             if(timer > coinDuration) {
@@ -128,9 +130,10 @@ public class Tower : MonoBehaviour
 
     public void SetCoins(int number) {
         coinQuantity = number;
+        counter.SetText(coinQuantity.ToString());
     }
 
-    public int GetCoins(int number) {
+    public int GetCoins() {
         return coinQuantity;
     }
 
@@ -139,6 +142,7 @@ public class Tower : MonoBehaviour
         if (coinQuantity <= 0 && timer <= 0.01f)
             SoundManager.Instance.PlayTowerActivated(audioSource);
         coinQuantity += number;
+        counter.SetText(coinQuantity.ToString());
     }
 
     public void RefillCoin()
