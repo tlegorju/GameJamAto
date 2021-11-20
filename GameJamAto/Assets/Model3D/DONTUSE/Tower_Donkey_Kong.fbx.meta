@@ -3,7 +3,57 @@ guid: dad6386b8d864ae448f6d547603ae59e
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Green press
+    second: {fileID: 2100000, guid: d8cfba569fa246d4e8dfbe21f8a12ba2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Orange metalic
+    second: {fileID: 2100000, guid: 874d30e46275419469180a2dd031acfa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Orange opaque
+    second: {fileID: 2100000, guid: 6ff27827f73cc60408f7b60123eadecc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: White opaque
+    second: {fileID: 2100000, guid: 1226562dca6d4b54e8f3fbfbcce7b0cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blue opaque
+    second: {fileID: 2100000, guid: 01dd1df6c1fe742469f7070f5e46c6a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metalic
+    second: {fileID: 2100000, guid: 083fb7f5c5539e944962d47745f16712, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metalic.003
+    second: {fileID: 2100000, guid: a2e126337e6bbfa438e122b996f7f3c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pure black
+    second: {fileID: 2100000, guid: 9ca574aa10ed43c4aadd18170ac41259, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pure black.002
+    second: {fileID: 2100000, guid: 40267f8b5d8eb414ca8459736d0dc650, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pure yellow
+    second: {fileID: 2100000, guid: 20e973d509c7dd14a9ae28f1f9ab814b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
