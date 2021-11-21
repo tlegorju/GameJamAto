@@ -12,6 +12,13 @@ public class Tower : MonoBehaviour
     [SerializeField] private LayerMask enemyMask;
     [SerializeField] private TimerBar timerBar;
     [SerializeField] private CounterCoinUI counter;
+    [SerializeField] private GameObject TurnedOnScreen;
+    [SerializeField] private GameObject TurnedOffScreen;
+
+    [Header("Tower State")]
+    [SerializeField] private bool isOn = false;
+    public bool IsOn { get { return isOn; } set { isOn = value; SetScreenVisual(isOn); } }
+
 
     [Header("Paramètres de la tour")]
     [Range(3, 50)][SerializeField] private float viewRadius = 10f;
@@ -50,6 +57,8 @@ public class Tower : MonoBehaviour
         StartCoroutine("routineFireAtTargets", firerate/10);
         timerBar.SetMaxTime(timer);
         timerBar.SetTime(timer);
+
+        IsOn = coinQuantity > 0 || timer > 0;
     }
 
     void Update()
@@ -95,6 +104,14 @@ public class Tower : MonoBehaviour
             coinQuantity--;
             counter.SetText(coinQuantity.ToString());
         }
+        else if(timer<=0 && coinQuantity <= 0)
+        {
+            if(IsOn)
+            {
+                IsOn = false;
+                SoundManager.Instance.PlayTowerDeactivated(audioSource);
+            }
+        }
         if(timer > 0) {
             if(timer > coinDuration) {
                 timer--;
@@ -123,10 +140,6 @@ public class Tower : MonoBehaviour
                 timerBar.SetTime(timer);
             }
         }
-        if(coinQuantity==0)
-        {
-            SoundManager.Instance.PlayTowerDeactivated(audioSource);
-        }
     }
 
     void FireTarget(Transform tf) {
@@ -148,8 +161,11 @@ public class Tower : MonoBehaviour
 
     public void AddCoins(int number)
     {
-        if (coinQuantity <= 0 && timer <= 0.01f)
+        if (!IsOn)
+        {
             SoundManager.Instance.PlayTowerActivated(audioSource);
+            IsOn = true;
+        }
         coinQuantity += number;
         counter.SetText(coinQuantity.ToString());
     }
@@ -164,5 +180,11 @@ public class Tower : MonoBehaviour
         {
             AddCoins(1);
         }
+    }
+
+    private void SetScreenVisual(bool screenIsOn)
+    {
+        TurnedOnScreen.SetActive(screenIsOn);
+        TurnedOffScreen.SetActive(!screenIsOn);
     }
 }
