@@ -7,28 +7,38 @@ public class HealthBar : MonoBehaviour
 {
     public Slider slider;
     private Transform cam;
-    private int lifeTo;
+    private float lifeTo;
+
+    private const float LerpSpeed = 3f;
 
     private void Awake() {
         cam = Camera.main.GetComponent<Transform>();    
     }
 
-    private void Update() {
-        if(slider.value != lifeTo) { 
-            float delta = lifeTo - slider.value;
-            delta *= Time.deltaTime;
-    
-            slider.value += delta;
+    private void Update()
+    {
+        if (slider.value == lifeTo)
+        {
+            return;
+        }
+        else if (Mathf.Abs(slider.value - lifeTo) < 0.001f)
+        {
+            slider.value = lifeTo;
+        }
+        else
+        {
+            slider.value = Mathf.Lerp(slider.value, lifeTo, Time.deltaTime * LerpSpeed);
         }
     }
     
     public void SetMaxLife(int life) {
-        slider.maxValue = life;
-        slider.value = life;
+        slider.value = 1;
+        lifeTo = 1;
     }
 
-    public void SetLife(int life) {
-        lifeTo = life;
+    public void SetLife(float life)
+    {
+        lifeTo = Mathf.Clamp01(life);
     }
 
     private void LateUpdate() {

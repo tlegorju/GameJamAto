@@ -7,11 +7,12 @@ public class Bullet : MonoBehaviour
     /* ENTRIES */
     [Header("Objets")]
     private Transform target;
+    private BoxCollider targetCollider;
 
     [Header("Paramètres de la boulette")]
-    [Range(5, 100)][SerializeField] private float speed = 150f;
+    [Range(5, 500)][SerializeField] private float speed = 150f;
     [Range(5, 15)][SerializeField] private int lifetime = 5;
-    [Range(1, 10)][SerializeField] private int power = 1;
+    [SerializeField] private int damages = 1;
 
     void Start()
     {
@@ -21,12 +22,12 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         if(lifetime <= 0 || target == null) Destroy(gameObject);
-        if(target != null) transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        if(target != null) transform.position = Vector3.MoveTowards(transform.position, target.position + targetCollider.center, speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other) {
         if(other.GetComponent<Ennemy>() != null) {
-            other.GetComponent<Ennemy>().TakeDamages(power);
+            other.GetComponent<Ennemy>().TakeDamages(damages);
             Destroy(gameObject);
         }
     }
@@ -40,5 +41,6 @@ public class Bullet : MonoBehaviour
 
     public void SetTarget(Transform tf) {
         target = tf;
+        targetCollider = target.GetComponent<BoxCollider>();
     }
 }

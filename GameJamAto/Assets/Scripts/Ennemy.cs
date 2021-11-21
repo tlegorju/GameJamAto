@@ -7,6 +7,8 @@ public class Ennemy : MonoBehaviour
     [SerializeField] private HealthBar healthBar;
 
     [SerializeField]
+    private int MAX_LIFE_POINT;
+
     private int _lifePoint;
     public int LifePoint
     {
@@ -15,7 +17,7 @@ public class Ennemy : MonoBehaviour
         set
         {
             _lifePoint = value;
-            healthBar.SetLife(_lifePoint);
+            healthBar.SetLife(((float)_lifePoint)/MAX_LIFE_POINT);
             if (_lifePoint <= 0 && !_isDead)
             {
                 GameManager.Instance.AddScore(Score);
@@ -62,13 +64,13 @@ public class Ennemy : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        healthBar.SetMaxLife(LifePoint);
-        healthBar.SetLife(LifePoint);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        _lifePoint = MAX_LIFE_POINT;
+        healthBar.SetMaxLife(LifePoint);
     }
 
     // Update is called once per frame

@@ -356,12 +356,12 @@ MonoBehaviour:
   TurnedOnScreen: {fileID: 3030604526033257057}
   TurnedOffScreen: {fileID: 3774069486482752244}
   isOn: 1
-  viewRadius: 15
-  firerate: 2.21
+  viewRadius: 25
+  firerate: 1
   maxTargetAtOnce: 1
   coinQuantity: 3
-  coinDuration: 8
-  nav: {fileID: 0}
+  ratioTimePerShoot: 0.1
+  decayingRatioPerSecond: 0.02
 --- !u!82 &6099119260904995478
 AudioSource:
   m_ObjectHideFlags: 0
@@ -495,7 +495,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3270104173319741911}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.19, y: 1.86, z: 1.61}
+  m_LocalPosition: {x: -0.19, y: 1.86, z: 1.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3270104173319256992}
@@ -740,7 +740,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 6842377759511221519}
   m_HandleRect: {fileID: 0}

@@ -7,28 +7,38 @@ public class TimerBar : MonoBehaviour
 {
     public Slider slider;
     private Transform cam;
-    private int timeTo;
+    private float timeTo;
+
+    private const float LerpSpeed = 2f;
 
     private void Awake() {
         cam = Camera.main.GetComponent<Transform>();    
     }
 
     private void Update() {
-        if(slider.value != timeTo) { 
-            float delta = timeTo - slider.value;
-            delta *= Time.deltaTime;
-    
-            slider.value += delta;
+        
+        if(slider.value == timeTo)
+        {
+            return;
+        }
+        else if(Mathf.Abs(slider.value-timeTo)<0.001f)
+        {
+            slider.value = timeTo;
+        }
+        else
+        {
+            slider.value = Mathf.Lerp(slider.value, timeTo, Time.deltaTime * LerpSpeed);
         }
     }
-    
-    public void SetMaxTime(int time) {
-        slider.maxValue = time;
-        slider.value = time;
+
+    public void SetMaxTime()
+    {
+        slider.maxValue = 1;
+        slider.value = 1;
     }
 
-    public void SetTime(int time) {
-        timeTo = time;
+    public void SetTime(float time) {
+        timeTo = Mathf.Clamp01(time);
     }
 
     private void LateUpdate() {

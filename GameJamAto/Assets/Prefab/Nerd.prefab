@@ -425,8 +425,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5140529, y: 3.4845884, z: 1}
-  m_Center: {x: -0.25702643, y: 1.7991854, z: 0}
+  m_Size: {x: 2.5199537, y: 6.9833727, z: 0.5}
+  m_Center: {x: -0.7599766, y: 3.5485778, z: 0.2}
 --- !u!114 &6938165365280508525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 7092307127610581820}
-  _lifePoint: 50
+  MAX_LIFE_POINT: 60
   _isDead: 0
   _speed: 2
   _damage: 1

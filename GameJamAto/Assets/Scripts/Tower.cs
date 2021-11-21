@@ -25,19 +25,18 @@ public class Tower : MonoBehaviour
     [Range(0, 10)][SerializeField] private float firerate = .1f;
     [Range(1, 50)][SerializeField] private int maxTargetAtOnce = 2;
     [Range(1, 500)][SerializeField] private int coinQuantity = 3;
-    [Range(1, 100)][SerializeField] private int coinDuration = 15;
+    [Range(0, 1)][SerializeField] private float ratioTimePerShoot = .1f;
+    [Range(0, 1)] [SerializeField] private float decayingRatioPerSecond = .02f;
 
     /* PROPERTIES */
     private Collider[] _targetsInViewRadius = {};
     private List<Collider> _targetsToShoot = new List<Collider>();
     private Vector3 currentTargetPos;
-    private int timer = 0;
+    private float timer = 0;
     private bool isShooting = false;
     private bool isShootingCoroutine = true;
 
     private AudioSource audioSource;
-
-    public NavMeshAgent nav;
     
 
     private void OnDrawGizmosSelected()
@@ -54,16 +53,20 @@ public class Tower : MonoBehaviour
     void Start()
     {
         StartCoroutine("routineFindTargets", .2f);
-        StartCoroutine("routineFireAtTargets", firerate/10);
-        timerBar.SetMaxTime(timer);
-        timerBar.SetTime(timer);
+        StartCoroutine("routineFireAtTargets", firerate);
+        timerBar.SetMaxTime();
 
         IsOn = coinQuantity > 0 || timer > 0;
     }
 
     void Update()
     {
+        if (GameManager.Instance != null && GameManager.Instance.CurrentGameState != GameState.Playing)
+            return;
+
         LookAtCurrentTarget();
+        timer -= decayingRatioPerSecond*Time.deltaTime;
+        timerBar.SetTime(timer);
     }
 
     void LookAtCurrentTarget() {
@@ -100,25 +103,24 @@ public class Tower : MonoBehaviour
     void GetAndFireAtTargets() {
         // Check if timer is empty then check if the tower has coins to add time to the timer
         if(timer <= 0 && coinQuantity > 0) {
-            timer += coinDuration + 1;
+            timer = 1;
             coinQuantity--;
             counter.SetText(coinQuantity.ToString());
+            timerBar.SetMaxTime();
+            StartCoroutine(CountDown());
         }
         else if(timer<=0 && coinQuantity <= 0)
         {
             if(IsOn)
             {
+                timer = 0;
+                timerBar.SetTime(timer);
+
                 IsOn = false;
                 SoundManager.Instance.PlayTowerDeactivated(audioSource);
             }
         }
-        if(timer > 0) {
-            if(timer > coinDuration) {
-                timer--;
-                timerBar.SetMaxTime(timer);
-                timerBar.SetTime(timer);
-                StartCoroutine("CountDown");
-            }
+        else {
              _targetsToShoot.Clear();
             foreach(Collider collider in _targetsInViewRadius) {
                 if(_targetsToShoot.Count <= (maxTargetAtOnce - 1) && collider != null) {
@@ -136,7 +138,7 @@ public class Tower : MonoBehaviour
         while(timer > 0) {
             yield return new WaitForSeconds(1f);
             if(isShooting) {
-                timer--;
+                timer-=ratioTimePerShoot;
                 timerBar.SetTime(timer);
             }
         }
@@ -172,10 +174,6 @@ public class Tower : MonoBehaviour
 
     public void RefillCoin()
     {
-        //this.nav = nav;
-        //nav.stoppingDistance = 4f;
-        //nav.destination = this.transform.position;
-
         if (GameManager.Instance.UseCoin())
         {
             AddCoins(1);

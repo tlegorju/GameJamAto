@@ -85,11 +85,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6938165365280508524, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: m_Size.x
-      value: 2.2715154
+      value: 5.84
       objectReference: {fileID: 0}
     - target: {fileID: 6938165365280508524, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: m_Size.y
-      value: 4.321784
+      value: 11.663885
       objectReference: {fileID: 0}
     - target: {fileID: 6938165365280508524, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: m_Center.x
@@ -97,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6938165365280508524, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: m_Center.y
-      value: 2.13805
+      value: 5.8091
       objectReference: {fileID: 0}
     - target: {fileID: 6938165365280508525, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: _score
@@ -113,12 +113,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6938165365280508525, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: _lifePoint
-      value: 100
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6938165365280508525, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: MAX_LIFE_POINT
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6938165365280508527, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f7e0aec60b9a6e64ea0ed1de235f1a7a, type: 2}
+    - target: {fileID: 7245759841457840582, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7245759841457840582, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7741843757014931887, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -3.25
