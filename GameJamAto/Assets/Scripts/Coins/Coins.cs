@@ -31,11 +31,11 @@ public class Coins : MonoBehaviour
         _lifeTime += Time.deltaTime;
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider collider)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collider.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerMovement>()?.PlayPickUpCoin();
+            collider.gameObject.GetComponent<PlayerMovement>()?.PlayPickUpCoin();
             GameManager.Instance.AddCoin(1);
             Destroy(gameObject);
         }

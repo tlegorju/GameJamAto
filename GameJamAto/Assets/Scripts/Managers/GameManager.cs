@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     private int lifeLeft = 10;
     public int LifeLeft { get { return lifeLeft; } }
 
-    public const int COINS_AT_START = 5;
+    public int COINS_AT_START = 5;
 
     private int coinLeft = 0;
     public int CoinLeft { get { return coinLeft; } }
