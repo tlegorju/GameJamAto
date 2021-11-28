@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
+using Random = UnityEngine.Random;
 
 public class CoinsManager : MonoBehaviour
 {
@@ -11,36 +14,53 @@ public class CoinsManager : MonoBehaviour
     [SerializeField]
     private GameObject _coin;
 
-    private int _nextSpawn;
+    private float _nextSpawn;
     [SerializeField]
-    private int _minNextSpawn;
+    private float _minNextSpawn;
     [SerializeField]
-    private int _maxNextSpawn;
+    private float _maxNextSpawn;
 
     private float _timeSinceLastSpawn = 0;
 
     [SerializeField]
-    private int _maxCoinsOnGround;
+    private int _maxCoinsInGame=10;
+    private int currentCoinsCountInGame;
 
-    public int NumberOfCoinsActuallySpawn
-    {
-        get => CoinsSpanwers.Where(spawner => !spawner.IsFree).Count();
-    }
 
     [SerializeField]
     public List<CoinsSpawner> CoinsSpanwers;
+
+    private void Awake()
+    {
+        if(instance!=null)
+        {
+            Destroy(this);
+            return;
+        }
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         instance = new CoinsManager();
-        _nextSpawn = _minNextSpawn;
+        _nextSpawn = PickNextSpawn();
+
+        currentCoinsCountInGame = GameManager.Instance.CoinLeft;
+        Tower[] towers = GameObject.FindObjectsOfType<Tower>();
+        if(towers!=null)
+        {
+            for(int i=0;i<towers.Length;i++)
+            {
+                currentCoinsCountInGame += towers[i].CoinQuantity;
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_nextSpawn < _timeSinceLastSpawn && NumberOfCoinsActuallySpawn < _maxCoinsOnGround)
+        if (_nextSpawn < _timeSinceLastSpawn && currentCoinsCountInGame < _maxCoinsInGame)
         {
             SpawnAtRandomPos();
         }
@@ -58,6 +78,16 @@ public class CoinsManager : MonoBehaviour
         availableSpawner[randomIndex].SpawnACoin(_coin);
 
         _timeSinceLastSpawn = 0;
-        _nextSpawn = Random.Range(_minNextSpawn, _maxNextSpawn);
+        _nextSpawn = PickNextSpawn();
+    }
+
+    private float PickNextSpawn()
+    {
+        return Random.Range(_minNextSpawn, _maxNextSpawn);
+    }
+
+    public void CoinConsumed()
+    {
+        currentCoinsCountInGame--;
     }
 }

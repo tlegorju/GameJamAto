@@ -87,12 +87,12 @@ public class Ennemy : MonoBehaviour
         transform.position = Vector3.Lerp(ptDepart.position, ptArrive.position, _travelCompletion);
         _travelCompletion += Time.deltaTime * Speed / Vector3.Distance(ptDepart.position, ptArrive.position);
 
-        if (_travelCompletion > 1 && _nextCheckPoint < (_path.Points.Count - 1))
+        if (_travelCompletion >= 1 && _nextCheckPoint < (_path.Points.Count - 1))
         {
             _nextCheckPoint++;
             _travelCompletion = 0;
         }
-        else if (_travelCompletion > 1)
+        if (_nextCheckPoint >= _path.Points.Count)
         {
             DamagePlayer();
         }
@@ -102,6 +102,7 @@ public class Ennemy : MonoBehaviour
     {
         if (!_isDead)
             LifePoint -= damage;
+        Debug.Log("Lifepoint : " + _lifePoint + " - damages : " + damage);
     }
 
     public void DamagePlayer()

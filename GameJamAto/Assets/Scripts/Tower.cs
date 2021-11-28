@@ -25,6 +25,7 @@ public class Tower : MonoBehaviour
     [Range(0, 10)][SerializeField] private float firerate = .1f;
     [Range(1, 50)][SerializeField] private int maxTargetAtOnce = 2;
     [Range(1, 500)][SerializeField] private int coinQuantity = 3;
+    public int CoinQuantity { get => coinQuantity; }
     [Range(0, 1)][SerializeField] private float ratioTimePerShoot = .1f;
     [Range(0, 1)] [SerializeField] private float decayingRatioPerSecond = .02f;
 
@@ -105,6 +106,7 @@ public class Tower : MonoBehaviour
         if(timer <= 0 && coinQuantity > 0) {
             timer = 1;
             coinQuantity--;
+            CoinsManager.Instance?.CoinConsumed();
             counter.SetText(coinQuantity.ToString());
             timerBar.SetMaxTime();
             StartCoroutine(CountDown());

@@ -38,8 +38,14 @@ public class PlayerMovement : MonoBehaviour
         {
             if(Input.touchCount>0)
             {
-                requireMovement = true;
-                screenPointerPosition = Input.GetTouch(0).position;
+                for(int i=0;i<Input.touchCount;i++)
+                {
+                    if(Input.GetTouch(i).phase == TouchPhase.Ended)
+                    {
+                        requireMovement = true;
+                        screenPointerPosition = Input.GetTouch(i).position;
+                    }
+                }
             }
         }
 
