@@ -24,11 +24,14 @@ public class CoinsManager : MonoBehaviour
 
     [SerializeField]
     private int _maxCoinsInGame=10;
+    [SerializeField]
     private int currentCoinsCountInGame;
 
 
     [SerializeField]
     public List<CoinsSpawner> CoinsSpanwers;
+
+    private bool playing = false;
 
     private void Awake()
     {
@@ -43,30 +46,41 @@ public class CoinsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        instance = new CoinsManager();
+    }
+
+    public void StartGame()
+    {
         _nextSpawn = PickNextSpawn();
 
         currentCoinsCountInGame = GameManager.Instance.CoinLeft;
         Tower[] towers = GameObject.FindObjectsOfType<Tower>();
-        if(towers!=null)
+        if (towers != null)
         {
-            for(int i=0;i<towers.Length;i++)
+            for (int i = 0; i < towers.Length; i++)
             {
                 currentCoinsCountInGame += towers[i].CoinQuantity;
             }
         }
+        _timeSinceLastSpawn = Time.time;
+
+        playing = true;
+    }
+
+    public void StopGame()
+    {
+        playing = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_nextSpawn < _timeSinceLastSpawn && currentCoinsCountInGame < _maxCoinsInGame)
+        if (!playing)
+            return;
+
+        float ponderation = Mathf.Lerp(0.2f, 1, Mathf.InverseLerp(0, _maxCoinsInGame, currentCoinsCountInGame));
+        if ((_timeSinceLastSpawn+_nextSpawn * ponderation - Time.time) <= 0 && currentCoinsCountInGame < _maxCoinsInGame)
         {
             SpawnAtRandomPos();
-        }
-        else
-        {
-            _timeSinceLastSpawn += Time.deltaTime;
         }
     }
 
@@ -74,11 +88,16 @@ public class CoinsManager : MonoBehaviour
     {
         // Je récupère seulement les Spawner libre
         List<CoinsSpawner> availableSpawner = CoinsSpanwers.Where(spawner => spawner.IsFree).ToList();
+        if (availableSpawner.Count < 1)
+            return;
+
         int randomIndex = Random.Range(0, availableSpawner.Count - 1);
         availableSpawner[randomIndex].SpawnACoin(_coin);
 
-        _timeSinceLastSpawn = 0;
+        _timeSinceLastSpawn = Time.time;
         _nextSpawn = PickNextSpawn();
+
+        currentCoinsCountInGame++;
     }
 
     private float PickNextSpawn()
@@ -89,5 +108,7 @@ public class CoinsManager : MonoBehaviour
     public void CoinConsumed()
     {
         currentCoinsCountInGame--;
+        if (currentCoinsCountInGame < 0)
+            currentCoinsCountInGame = 0;
     }
 }

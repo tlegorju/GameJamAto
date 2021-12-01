@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     private int lifeLeft = 10;
     public int LifeLeft { get { return lifeLeft; } }
 
-    public int COINS_AT_START = 5;
+    public int COINS_AT_START = 3;
 
     private int coinLeft = 0;
     public int CoinLeft { get { return coinLeft; } }
@@ -46,6 +46,13 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
+
+        gameState = GameState.MainMenu;
+
+        lifeLeft = LIFE_AT_START;
+        score = 0;
+        waveNumber = 0;
+        coinLeft = COINS_AT_START;
     }
 
     private void Start()
@@ -69,6 +76,7 @@ public class GameManager : MonoBehaviour
     {
         UIManager.Instance.InitGameHUD();
         SoundManager.Instance.PlayMusic();
+        CoinsManager.Instance.StartGame();
 
         gameState = GameState.Playing;
 
@@ -77,7 +85,7 @@ public class GameManager : MonoBehaviour
 
     public void StopPlay()
     {
-
+        CoinsManager.Instance.StopGame();
     }
 
     public void TakeDamages(int damages)
@@ -107,6 +115,7 @@ public class GameManager : MonoBehaviour
         SoundManager.Instance.PlayGameOver();
         UIManager.Instance.GameOver(score);
 
+        StopPlay();
     }
 
     public void ContinueGameOver()

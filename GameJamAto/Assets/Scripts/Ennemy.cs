@@ -52,8 +52,6 @@ public class Ennemy : MonoBehaviour
     /// </summary>
     private int _nextCheckPoint = 1;
 
-    private float _travelCompletion = 0;
-
     private AudioSource audioSource;
 
     [SerializeField]
@@ -76,6 +74,15 @@ public class Ennemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (_isDead)
+            return;
+
+        if(_nextCheckPoint >= _path.Points.Count)
+        {
+            Dies();
+            return;
+        }
+
         MoveBetweenTwoPoints(_path.Points[_nextCheckPoint - 1], _path.Points[_nextCheckPoint]);
     }
 
@@ -83,14 +90,12 @@ public class Ennemy : MonoBehaviour
     {
         if (_isDead)
             return;
-        transform.LookAt(ptArrive);
-        transform.position = Vector3.Lerp(ptDepart.position, ptArrive.position, _travelCompletion);
-        _travelCompletion += Time.deltaTime * Speed / Vector3.Distance(ptDepart.position, ptArrive.position);
+        //transform.LookAt(ptArrive);
+        transform.position = Vector3.MoveTowards(transform.position, ptArrive.position, Time.deltaTime * Speed);
 
-        if (_travelCompletion >= 1 && _nextCheckPoint < (_path.Points.Count - 1))
+        if (Vector3.Distance(transform.position,ptArrive.position) <= .9f && _nextCheckPoint < (_path.Points.Count))
         {
             _nextCheckPoint++;
-            _travelCompletion = 0;
         }
         if (_nextCheckPoint >= _path.Points.Count)
         {
@@ -102,7 +107,6 @@ public class Ennemy : MonoBehaviour
     {
         if (!_isDead)
             LifePoint -= damage;
-        Debug.Log("Lifepoint : " + _lifePoint + " - damages : " + damage);
     }
 
     public void DamagePlayer()

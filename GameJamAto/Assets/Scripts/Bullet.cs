@@ -11,34 +11,30 @@ public class Bullet : MonoBehaviour
 
     [Header("Paramètres de la boulette")]
     [Range(5, 500)][SerializeField] private float speed = 150f;
-    [Range(5, 15)][SerializeField] private int lifetime = 5;
+    [Range(5, 15)][SerializeField] private float lifetime = 5;
     [SerializeField] private int damages = 1;
+    [SerializeField] private bool lookAtEnnemy = false;
 
     void Start()
     {
-        StartCoroutine("LifetimeCountdown");
+
     }
 
     void Update()
     {
         if(lifetime <= 0 || target == null) Destroy(gameObject);
+        lifetime -= Time.deltaTime;
+
         if(target != null) transform.position = Vector3.MoveTowards(transform.position, target.position + targetCollider.center, speed * Time.deltaTime);
+        if(lookAtEnnemy)
+            transform.rotation = Quaternion.LookRotation(target.position + targetCollider.center - transform.position);
     }
 
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("Collide");
         if(other.GetComponent<Ennemy>() != null)
         {
-            Debug.Log("CollideEnemy " + other.gameObject.name);
             other.GetComponent<Ennemy>().TakeDamages(damages);
             Destroy(gameObject);
-        }
-    }
-
-    private IEnumerator LifetimeCountdown() {
-        while(lifetime > 0) {
-            yield return new WaitForSeconds(1f);
-            lifetime--;
         }
     }
 

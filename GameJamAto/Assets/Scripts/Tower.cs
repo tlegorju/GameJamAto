@@ -104,18 +104,13 @@ public class Tower : MonoBehaviour
     void GetAndFireAtTargets() {
         // Check if timer is empty then check if the tower has coins to add time to the timer
         if(timer <= 0 && coinQuantity > 0) {
-            timer = 1;
-            coinQuantity--;
-            CoinsManager.Instance?.CoinConsumed();
-            counter.SetText(coinQuantity.ToString());
-            timerBar.SetMaxTime();
-            StartCoroutine(CountDown());
+            RefillTimer();
         }
         else if(timer<=0 && coinQuantity <= 0)
         {
-            if(IsOn)
+            timer = 0;
+            if (IsOn)
             {
-                timer = 0;
                 timerBar.SetTime(timer);
 
                 IsOn = false;
@@ -130,21 +125,17 @@ public class Tower : MonoBehaviour
                 }
             }
             foreach(Collider collider in _targetsToShoot) {
-                if (collider != null && !collider.gameObject.GetComponent<Ennemy>()._isDead) FireTarget(collider.transform);
+                if (collider != null && !collider.gameObject.GetComponent<Ennemy>()._isDead)
+                {
+                    FireTarget(collider.transform);
+                    timer -= ratioTimePerShoot;
+                    timerBar.SetTime(timer);
+                }
             }
         }
        
     }
 
-    IEnumerator CountDown() {
-        while(timer > 0) {
-            yield return new WaitForSeconds(1f);
-            if(isShooting) {
-                timer-=ratioTimePerShoot;
-                timerBar.SetTime(timer);
-            }
-        }
-    }
 
     void FireTarget(Transform tf) {
         currentTargetPos = tf.position;
@@ -171,7 +162,13 @@ public class Tower : MonoBehaviour
             IsOn = true;
         }
         coinQuantity += number;
-        counter.SetText(coinQuantity.ToString());
+        if(timer<=0.01f)
+        {
+            RefillTimer();
+
+        }
+        else
+            counter.SetText(coinQuantity.ToString());
     }
 
     public void RefillCoin()
@@ -186,5 +183,17 @@ public class Tower : MonoBehaviour
     {
         TurnedOnScreen.SetActive(screenIsOn);
         TurnedOffScreen.SetActive(!screenIsOn);
+    }
+
+    private void RefillTimer()
+    {
+        if (coinQuantity < 1)
+            return;
+
+        timer = 1;
+        coinQuantity--;
+        timerBar.SetTime(timer);
+        counter.SetText(coinQuantity.ToString());
+        CoinsManager.Instance?.CoinConsumed();
     }
 }

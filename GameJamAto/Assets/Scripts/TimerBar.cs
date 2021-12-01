@@ -17,17 +17,14 @@ public class TimerBar : MonoBehaviour
 
     private void Update() {
         
-        if(slider.value == timeTo)
-        {
-            return;
-        }
-        else if(Mathf.Abs(slider.value-timeTo)<0.001f)
+        if(Mathf.Abs(slider.value-timeTo)<0.001f)
         {
             slider.value = timeTo;
+            return;
         }
         else
         {
-            slider.value = Mathf.Lerp(slider.value, timeTo, Time.deltaTime * LerpSpeed);
+            slider.value = Mathf.MoveTowards(slider.value, timeTo, Time.deltaTime * LerpSpeed);
         }
     }
 
