@@ -93,9 +93,9 @@ public class Ennemy : MonoBehaviour
         //transform.LookAt(ptArrive);
         transform.position = Vector3.MoveTowards(transform.position, ptArrive.position, Time.deltaTime * Speed);
 
-        if (Vector3.Distance(transform.position,ptArrive.position) <= .9f && _nextCheckPoint < (_path.Points.Count))
+        if (Vector3.Distance(transform.position,ptArrive.position) <= .9f && _nextCheckPoint < _path.Points.Count)
         {
-            _nextCheckPoint++;
+            ++_nextCheckPoint;
         }
         if (_nextCheckPoint >= _path.Points.Count)
         {
