@@ -15,6 +15,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private int damages = 1;
     [SerializeField] private bool lookAtEnnemy = false;
 
+    [SerializeField] private GameObject particlesHit;
+
     void Start()
     {
 
@@ -34,6 +36,11 @@ public class Bullet : MonoBehaviour
         if(other.GetComponent<Ennemy>() != null)
         {
             other.GetComponent<Ennemy>().TakeDamages(damages);
+
+            Transform cam = Camera.main.transform;
+            GameObject particleTmp = Instantiate(particlesHit, transform.position, Quaternion.LookRotation(-cam.forward, cam.up));
+            particleTmp.transform.localScale *= 4;
+
             Destroy(gameObject);
         }
     }

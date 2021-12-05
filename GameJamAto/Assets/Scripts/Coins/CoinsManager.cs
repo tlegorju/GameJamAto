@@ -69,6 +69,13 @@ public class CoinsManager : MonoBehaviour
     public void StopGame()
     {
         playing = false;
+
+        Coins[] coins = GameObject.FindObjectsOfType<Coins>();
+        for (int i = 0; i < coins.Length; i++)
+        {
+            Destroy(coins[i].gameObject);
+            currentCoinsCountInGame--;
+        }
     }
 
     // Update is called once per frame

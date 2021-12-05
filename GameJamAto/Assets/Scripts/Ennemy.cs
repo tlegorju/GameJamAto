@@ -124,7 +124,11 @@ public class Ennemy : MonoBehaviour
         _isDead = true;
         WaveManager.Instance.EnemyDies();
         SoundManager.Instance.TryPlayNerdDiesClip(audioSource);
-        Instantiate(_deathParticule, _deathParticuleTransform);
+
+        Transform cameraTransform = Camera.main.transform;
+        Vector3 forward = (cameraTransform.position - transform.position).normalized;
+        GameObject particle = Instantiate(_deathParticule, _deathParticuleTransform.position, Quaternion.LookRotation(forward, cameraTransform.up));
+        particle.transform.localScale *= 4;
         Invoke("DestroyObject", .3f);
     }
 

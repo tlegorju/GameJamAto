@@ -42,6 +42,7 @@ public class HealthBar : MonoBehaviour
     }
 
     private void LateUpdate() {
-        transform.LookAt(transform.position + cam.forward);
+        transform.localPosition = new Vector3(-.2f, 14.3f, -6.03f);
+        transform.rotation = Quaternion.LookRotation(-cam.forward);
     }
 }

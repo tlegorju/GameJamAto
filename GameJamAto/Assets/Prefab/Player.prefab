@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5429813082163488200}
   - component: {fileID: 3389660770954314537}
   - component: {fileID: 1016556121764158854}
+  - component: {fileID: 1440038000117261158}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
@@ -96,6 +97,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useStaticBillboard: 1
+--- !u!111 &1440038000117261158
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444965007231144792}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 6f7075548456da944bd31e44e17d89f4, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 6f7075548456da944bd31e44e17d89f4, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &6691934212211320106
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +142,7 @@ Transform:
   m_GameObject: {fileID: 6691934212211320106}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 5429813082163488200}
   m_Father: {fileID: 0}

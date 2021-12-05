@@ -34,8 +34,6 @@ public class Tower : MonoBehaviour
     private List<Collider> _targetsToShoot = new List<Collider>();
     private Vector3 currentTargetPos;
     private float timer = 0;
-    private bool isShooting = false;
-    private bool isShootingCoroutine = true;
 
     private AudioSource audioSource;
     
@@ -97,8 +95,6 @@ public class Tower : MonoBehaviour
 
     void FindTargets() {
         _targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, enemyMask);
-        if(_targetsInViewRadius.Length == 0) isShooting = false;
-        else isShooting = true;
     }
 
     void GetAndFireAtTargets() {

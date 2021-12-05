@@ -9,12 +9,24 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1692273241788141902, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.25
+      value: 6.6
       objectReference: {fileID: 0}
     - target: {fileID: 1692273241788141902, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.4090905
+      value: 15.68
       objectReference: {fileID: 0}
+    - target: {fileID: 2118782419371717059, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400000, guid: 0816622ae13180f458ce891c483320d0, type: 2}
+    - target: {fileID: 2118782419371717059, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_Animations.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118782419371717059, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
+      propertyPath: m_Animations.Array.data[1]
+      value: 
+      objectReference: {fileID: 7400000, guid: 0816622ae13180f458ce891c483320d0, type: 2}
     - target: {fileID: 2388709316330786389, guid: e11eec68644b7b34d809c9ff474df9ab, type: 3}
       propertyPath: m_LocalScale.x
       value: 3

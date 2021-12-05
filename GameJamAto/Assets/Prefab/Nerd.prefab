@@ -25,11 +25,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865062937039555516}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: 4.27, z: 0.6044321}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 5.78, y: 12.28, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 7741843757014931887}
-  m_Father: {fileID: 2388709316330786389}
+  m_Father: {fileID: 6938165365280508521}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7092307127610581820
@@ -148,7 +148,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6938165365280508521}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5195841468529689501
 GameObject:
@@ -407,8 +407,9 @@ Transform:
   m_GameObject: {fileID: 6938165365280508514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
+  - {fileID: 1692273241788141902}
   - {fileID: 2388709316330786389}
   - {fileID: 4049405530537198481}
   m_Father: {fileID: 0}
@@ -571,6 +572,7 @@ GameObject:
   - component: {fileID: 2388709316330786389}
   - component: {fileID: 5631583231286680121}
   - component: {fileID: 4516995133258155295}
+  - component: {fileID: 2118782419371717059}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
@@ -588,10 +590,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.54, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_Children:
-  - {fileID: 1692273241788141902}
+  m_Children: []
   m_Father: {fileID: 6938165365280508521}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5631583231286680121
 SpriteRenderer:
@@ -657,3 +658,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useStaticBillboard: 1
+--- !u!111 &2118782419371717059
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7253622294501790859}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: bad5e7230afe42741a296f46c8da1f85, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: bad5e7230afe42741a296f46c8da1f85, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0

@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
 {
     private NavMeshAgent nav;
     private RaycastHit hit;
-    public CameraShake cameraShake;
 
     private AudioSource audioSource;
 
@@ -57,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if(hit.collider.GetComponent<Tower>())
                 {
-                    if(Vector3.Distance(transform.position, hit.collider.transform.position) <= 4)
+                    if(Vector3.Distance(transform.position, hit.collider.transform.position) <= 8)
                     {
                         hit.collider.GetComponent<Tower>().RefillCoin();
                         return;

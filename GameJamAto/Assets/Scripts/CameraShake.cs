@@ -4,23 +4,70 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
-    public IEnumerator Shake(float duration, float magnitude)
+    private static CameraShake instance;
+    public static CameraShake Instance { get => instance; }
+
+    private float duration = .07f;
+    private float magnitude = 1f;
+    private float accumulationStrenght = 0;
+
+    Coroutine shakingCoroutine;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(this);
+            return;
+        }
+        instance = this;
+    }
+
+    private void Start()
+    {
+        shakingCoroutine = StartCoroutine(Shake());
+    }
+
+    private void Update()
+    {
+
+    }
+    public void Init(float duration, float magnitude)
+    {
+        this.duration = duration;
+        this.magnitude = magnitude;
+    }
+
+    public void ShakeCamera(float strength)
+    {
+        accumulationStrenght += strength;
+    }
+
+    private IEnumerator Shake()
     {
         Vector3 originalPos = transform.localPosition;
 
-        float elapsed = 0.0f;
-
-        while(elapsed < duration)
+        while(true)
         {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
+            float elapsed = 0.0f;
 
-            transform.localPosition = new Vector3(x, y, originalPos.z);
+            float x = Random.Range(-1f, 1f) * magnitude * accumulationStrenght;
+            float y = Random.Range(-1f, 1f) * magnitude * accumulationStrenght;
 
-            elapsed += Time.deltaTime;
+            while (elapsed < duration)
+            {
 
-            yield return null;
+                transform.localPosition = Vector3.MoveTowards(transform.localPosition, originalPos+transform.right*x+transform.up*y, elapsed/duration);
+
+                elapsed += Time.deltaTime;
+
+                yield return null;
+            }
+
+            accumulationStrenght = Mathf.Max(accumulationStrenght - duration, 0);
+
+            //transform.localPosition = originalPos;
+
         }
-        transform.localPosition = originalPos;
     }
 }
