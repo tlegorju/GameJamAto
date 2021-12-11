@@ -3,12 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum PlayerAction
+{
+    Idle,
+    Moving,
+    RefillTower,
+    PickupCoin
+}
+
 public class PlayerMovement : MonoBehaviour
 {
     private NavMeshAgent nav;
     private RaycastHit hit;
 
+    private PlayerAction currentAction;
+    private GameObject currentTarget;
+
     private AudioSource audioSource;
+
+    private GameObject pointedTower;
 
     private void Awake()
     {
@@ -48,25 +61,98 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        Ray ray = Camera.main.ScreenPointToRay(screenPointerPosition);
         if (requireMovement)
         {
-            Ray ray = Camera.main.ScreenPointToRay(screenPointerPosition);
 
             if(Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 if(hit.collider.GetComponent<Tower>())
                 {
-                    if(Vector3.Distance(transform.position, hit.collider.transform.position) <= 8)
-                    {
-                        hit.collider.GetComponent<Tower>().RefillCoin();
-                        return;
-                    }
+                    currentAction = PlayerAction.RefillTower;
+                    currentTarget = hit.collider.gameObject;
+                    nav.enabled = true;
+                    nav.SetDestination(hit.collider.transform.position);
                 }
-                
-                nav.SetDestination(hit.point);
+                else if(hit.collider.GetComponent<Coins>())
+                {
+                    currentAction = PlayerAction.PickupCoin;
+                    currentTarget = hit.collider.gameObject;
+                    nav.enabled = true;
+                    nav.SetDestination(hit.collider.transform.position);
+                }
+                else
+                {
+                    currentAction = PlayerAction.Moving;
+                    currentTarget = null;
+                    nav.enabled = true;
+                    nav.SetDestination(hit.point);
+                }
             }
         }
-        
+
+        switch(currentAction)
+        {
+            case PlayerAction.Idle:
+                break;
+            case PlayerAction.Moving:
+                if(Vector3.Distance(transform.position, nav.destination) < .1f || nav.isStopped)
+                {
+                    currentAction = PlayerAction.Idle;
+                    currentTarget = null;
+                    nav.enabled = false;
+                }
+                break;
+            case PlayerAction.RefillTower:
+                if (Vector3.Distance(transform.position, currentTarget.transform.position) <= 8)
+                {
+                    currentTarget.GetComponent<Tower>().RefillCoin();
+                    currentAction = PlayerAction.Idle;
+                    currentTarget = null;
+                    nav.enabled = false;
+                }
+                break;
+            case PlayerAction.PickupCoin:
+                if(currentTarget==null)
+                {
+                    currentAction = PlayerAction.Idle;
+                    nav.enabled = false;
+                }
+                break;
+        }
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            Tower t = hit.collider.GetComponentInChildren<Tower>();
+            if (t == null)
+                t = hit.collider.GetComponentInParent<Tower>();
+            if (t != null && t.gameObject != pointedTower)
+            {
+                if (pointedTower != null)
+                {
+                    pointedTower.GetComponentInChildren<OutlineController>()?.EnableOutline(false);
+                }
+                t.GetComponentInChildren<OutlineController>()?.EnableOutline(true);
+                pointedTower = t.gameObject;
+            }
+            else if (t == null)
+            {
+                if (pointedTower != null)
+                {
+                    pointedTower.GetComponentInChildren<OutlineController>()?.EnableOutline(false);
+                    pointedTower = null;
+                }
+            }
+        }
+        else
+        {
+            if (pointedTower != null)
+            {
+                pointedTower.GetComponentInChildren<OutlineController>()?.EnableOutline(false);
+                pointedTower = null;
+            }
+        }
+
     }
 
     public void PlayPickUpCoin()

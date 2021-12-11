@@ -902,3 +902,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4426195684622463183, guid: 3e6feeb2e46a82a49ad0d203a5f8e3fa, type: 3}
   m_PrefabInstance: {fileID: 3809788869252682457}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4379317988744570758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 583603491366384991, guid: 3e6feeb2e46a82a49ad0d203a5f8e3fa, type: 3}
+  m_PrefabInstance: {fileID: 3809788869252682457}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7349511853355966306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4379317988744570758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 446439945067a054292d8eb2a26a0614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMaterial: {fileID: 2100000, guid: ba8ba4efb0917914f8588ba56d13f9c2, type: 2}
+  outlineScaleFactor: -1.1
+  outlineColor: {r: 1, g: 0.65880984, b: 0, a: 1}
+  outlinedObjectPrefab: {fileID: 0}
